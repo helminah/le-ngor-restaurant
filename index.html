@@ -729,7 +729,7 @@ body::after{
   <div class="container">
     <div class="chiffres-inner glass-strong" style="padding:3rem 2rem;border-radius:16px">
       <div class="chiffre-item" data-reveal>
-        <div class="chiffre-number" data-count="15" data-suffix="+">0</div>
+        <div class="chiffre-number" data-count="20" data-suffix="+">0</div>
         <div class="chiffre-label">Ann&eacute;es sur la Corniche</div>
       </div>
       <div class="chiffre-item" data-reveal data-delay=".1">
@@ -845,19 +845,19 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">r&eacute;servation en ligne</h3>
           </div>
-          <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Merci ! Nous vous contacterons.';this.querySelector('button').disabled=true">
-            <div class="form-group" data-reveal><label>Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
+          <form action="https://formspree.io/f/TONID" method="POST" onsubmit="event.preventDefault();fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}}).then(r=>{if(r.ok){this.querySelector('button').textContent=currentLang==='fr'?'Merci ! Nous vous contacterons.':'Thank you! We will contact you.';this.querySelector('button').disabled=true}else{this.querySelector('button').textContent=currentLang==='fr'?'Erreur, réessayez':'Error, please try again'}})">
+            <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
-              <div class="form-group" data-reveal><label>T&eacute;l&eacute;phone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
-              <div class="form-group" data-reveal><label>Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
+              <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
+              <div class="form-group" data-reveal><label data-label="email">Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
             </div>
             <div class="form-row">
-              <div class="form-group" data-reveal><label>Date &amp; Heure</label><input type="datetime-local" name="date" required></div>
-              <div class="form-group" data-reveal><label>Convives</label><select name="convives" required><option value="">Choisir</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10+</option></select></div>
+              <div class="form-group" data-reveal><label data-label="datetime">Date &amp; Heure</label><input type="datetime-local" name="date" required></div>
+              <div class="form-group" data-reveal><label data-label="guests">Convives</label><select name="convives" required><option value="">Choisir</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10+</option></select></div>
             </div>
-            <div class="form-group" data-reveal><label>Occasion</label><select name="occasion"><option value="">Choisir (optionnel)</option><option>D&icirc;ner romantique</option><option>Anniversaire</option><option>&Eacute;v&eacute;nement priv&eacute;</option><option>Rooftop</option><option>Autre</option></select></div>
-            <div class="form-group" data-reveal><label>Message</label><textarea name="message" placeholder="Demandes sp&eacute;ciales..."></textarea></div>
-            <button type="submit" class="magnetic-btn" data-reveal style="width:100%"><span class="btn btn-primary" style="width:100%;justify-content:center">Envoyer la demande</span></button>
+            <div class="form-group" data-reveal><label data-label="occasion">Occasion</label><select name="occasion"><option value="">Choisir (optionnel)</option><option>D&icirc;ner romantique</option><option>Anniversaire</option><option>&Eacute;v&eacute;nement priv&eacute;</option><option>Rooftop</option><option>Autre</option></select></div>
+            <div class="form-group" data-reveal><label data-label="message">Message</label><textarea name="message" placeholder="Demandes sp&eacute;ciales..."></textarea></div>
+            <button type="submit" class="magnetic-btn" data-reveal style="width:100%"><span class="btn btn-primary" style="width:100%;justify-content:center" data-label="submit">Envoyer la demande</span></button>
           </form>
         </div>
       </div>
@@ -1036,7 +1036,9 @@ const translations={
     tem3:"Nous sommes venus pour le coucher de soleil et restés pour la cuisine. Le plateau de fruits de mer est incroyable, une ambiance unique à Dakar.",tem3a:"Sarah K. — London",
     footerTag:"Pieds dans l'eau — Corniche des Almadies, Dakar",footerMap:"Voir sur Google Maps",
     footerHours:"Ouvert tous les jours de 10h à 01h — Fermé le mardi",
-    footerCredit:'Site conçu par',footerCopy:"© 2026 Le Ngor Restaurant. Tous droits réservés."
+    footerCredit:'Site conçu par',footerCopy:"© 2026 Le Ngor Restaurant. Tous droits réservés.",
+    formName:"Nom complet",formPhone:"Téléphone",formEmail:"Email",formDatetime:"Date & Heure",formGuests:"Convives",formOccasion:"Occasion",formOccasionPlaceholder:"Choisir (optionnel)",formMessage:"Message",formMessagePlaceholder:"Demandes spéciales...",formSubmit:"Envoyer la demande",
+    optRomantic:"Dîner romantique",optBirthday:"Anniversaire",optPrivate:"Événement privé",optRooftop:"Rooftop",optOther:"Autre",optChoose:"Choisir"
   },
   en:{
     heroLabel:"Corniche des Almadies — Dakar, Senegal",
@@ -1046,7 +1048,7 @@ const translations={
     heroScroll:"Explore",
     navHistoire:"Our story",navCarte:"Menu",navExp:"The experience",navGalerie:"Gallery",navContact:"Contact",navReserver:"Book",
     histLabel:"Our story",histTitle:'A <em>legendary</em> Dakar landmark',
-    histP1:"For over 20 years, Le Ngor has been a haven for seafood lovers on the Corniche des Almadies. Toes in the sand, facing the Atlantic and the colorful pirogues of local fishermen, enjoy seafood of unmatched freshness.",
+    histP1:"For over 20 years, The Ngor has been a haven for seafood lovers on the Corniche des Almadies. Toes in the sand, facing the Atlantic and the colorful pirogues of local fishermen, enjoy seafood of unmatched freshness.",
     histP2:"Every table tells a different story: crashing waves, golden sunsets, the dance of pirogues returning from sea. African art meets the ocean breeze in a setting unlike anywhere else.",
     f1:"Oceanfront",f1d:"Tables facing the Atlantic Ocean",
     f2:"Handcrafted décor",f2d:"Sculptures, mosaics & African art",
@@ -1057,12 +1059,12 @@ const translations={
     tab1:"Starters",tab2:"Fish & Shellfish",tab3:"Meats & Mains",tab4:"Desserts",
     pb1:"« One address, a thousand flavors »",pb2:"« The most beautiful sunset on the Corniche »",
     sigLabel:"Our signature dish",sigTitle:'lobster in <em>orange cream</em>',
-    sigDesc:"Fresh lobster caught off the Corniche, served with a homemade orange cream. A Le Ngor classic since 2004.",
+    sigDesc:"Fresh lobster caught off the Corniche, served with a homemade orange cream. A Ngor classic since 2004.",
     sigPrice:"Per person",
-    expLabel:"The experience",expTitle:"the Le Ngor experience",expDesc:"A unique setting between sky and sea",
+    expLabel:"The experience",expTitle:"the Ngor experience",expDesc:"A unique setting between sky and sea",
     c1:"Years on the Corniche",c2:"TripAdvisor reviews",c3:"Restaurant in Dakar",c4:"Instagram followers",
     temLabel:"Reviews",temTitle:'what they <em>say</em>',
-    galLabel:"Gallery",galTitle:'moments at <em>le ngor</em>',
+    galLabel:"Gallery",galTitle:'moments at <em>The Ngor</em>',
     resLabel:"Book your table",resTitle:'contact & <em>reservations</em>',resDesc:"For a romantic evening or dinner with friends — book directly on WhatsApp.",
     resTel:"Phone",resAddr:"Address",resHours:"Hours",resHoursVal:"10am — 1am · Closed on Tuesdays",
     resWa:"Book on WhatsApp",
@@ -1081,7 +1083,9 @@ const translations={
     tem3:"We came for the sunset and stayed for the food. The seafood platter was incredible and the atmosphere unlike anything else in Dakar.",tem3a:"Sarah K. — London",
     footerTag:"Feet in the water — Corniche des Almadies, Dakar",footerMap:"View on Google Maps",
     footerHours:"Open daily 10am to 1am — Closed on Tuesdays",
-    footerCredit:'Website by',footerCopy:"© 2026 Le Ngor Restaurant. All rights reserved."
+    footerCredit:'Website by',footerCopy:"© 2026 Le Ngor Restaurant. All rights reserved.",
+    formName:"Full name",formPhone:"Phone",formEmail:"Email",formDatetime:"Date & Time",formGuests:"Guests",formOccasion:"Occasion",formOccasionPlaceholder:"Choose (optional)",formMessage:"Message",formMessagePlaceholder:"Special requests...",formSubmit:"Send request",
+    optRomantic:"Romantic dinner",optBirthday:"Birthday",optPrivate:"Private event",optRooftop:"Rooftop",optOther:"Other",optChoose:"Choose"
   }
 };
 let currentLang='fr';
@@ -1226,6 +1230,46 @@ document.getElementById('langToggle').onclick=function(){
   const fh=document.querySelector('.footer-hours');if(fh)fh.textContent=t.footerHours;
   const fc=document.querySelector('.footer-credit');if(fc)fc.innerHTML=t.footerCredit+' <a href="https://amevia.sn" target="_blank" rel="noopener">AMEVIA Agency</a>';
   const fco=document.querySelector('.footer-copy');if(fco)fco.textContent=t.footerCopy;
+  // Form
+  const formLabels=document.querySelectorAll('[data-label]');
+  formLabels.forEach(el=>{
+    const key=el.dataset.label;
+    if(key==='name')el.textContent=t.formName;
+    if(key==='phone')el.textContent=t.formPhone;
+    if(key==='email')el.textContent=t.formEmail;
+    if(key==='datetime')el.textContent=t.formDatetime;
+    if(key==='guests')el.textContent=t.formGuests;
+    if(key==='occasion')el.textContent=t.formOccasion;
+    if(key==='message')el.textContent=t.formMessage;
+    if(key==='submit')el.textContent=t.formSubmit;
+  });
+  const formPlaceholders=document.querySelectorAll('form input, form textarea, form select');
+  formPlaceholders.forEach(el=>{
+    if(el.name==='nom')el.placeholder=t.formName;
+    if(el.name==='tel')el.placeholder='+221 7X XXX XX XX';
+    if(el.name==='email')el.placeholder=t.formEmail.toLowerCase();
+    if(el.name==='message')el.placeholder=t.formMessagePlaceholder;
+  });
+  const selects=document.querySelectorAll('form select[name="occasion"]');
+  selects.forEach(sel=>{
+    const opts=sel.querySelectorAll('option');
+    if(opts[0]){opts[0].textContent=t.formOccasionPlaceholder;opts[0].value='';}
+    if(opts[1])opts[1].textContent=t.optRomantic;
+    if(opts[2])opts[2].textContent=t.optBirthday;
+    if(opts[3])opts[3].textContent=t.optPrivate;
+    if(opts[4])opts[4].textContent=t.optRooftop;
+    if(opts[5])opts[5].textContent=t.optOther;
+  });
+  const guestSelects=document.querySelectorAll('form select[name="convives"]');
+  guestSelects.forEach(sel=>{
+    const opts=sel.querySelectorAll('option');
+    if(opts[0])opts[0].textContent=t.optChoose;
+  });
+  // Reservation card label
+  const resCardLabel=document.querySelector('#reservation .glass-strong .section-label');
+  if(resCardLabel)resCardLabel.textContent=currentLang==='fr'?'Réserver':'Book';
+  const resCardTitle=document.querySelector('#reservation .glass-strong h3');
+  if(resCardTitle)resCardTitle.textContent=currentLang==='fr'?'réservation en ligne':'online reservation';
 };
 </script>
 </body>
