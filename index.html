@@ -161,7 +161,7 @@ body::after{
 }
 .img-glass-text{font-family:var(--serif);font-size:1rem;font-weight:400;font-style:italic;color:var(--white);text-shadow:0 1px 4px rgba(0,0,0,.3)}
 .histoire-text p{font-size:1rem;line-height:1.9;color:rgba(26,29,35,.7);margin-bottom:1.5rem}
-.histoire-features{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(26,29,35,.08)}
+.histoire-features{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(26,29,35,.08)}
 .feature-item{text-align:center}
 .feature-icon{width:40px;height:40px;margin:0 auto .8rem;color:var(--accent-dark)}
 .feature-icon svg{width:100%;height:100%}
@@ -483,7 +483,10 @@ body::after{
     <li><a href="#galerie">Galerie</a></li>
     <li><a href="#reservation">Contact</a></li>
   </ul>
-  <div class="nav-cta"><a href="#reservation" class="magnetic-btn"><span class="btn btn-primary">R&eacute;server</span></a></div>
+  <div class="nav-cta" style="display:flex;align-items:center;gap:1rem">
+    <button id="langToggle" style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:.4rem .8rem;border-radius:3px;cursor:pointer;transition:all .3s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.6)'">EN</button>
+    <a href="#reservation" class="magnetic-btn"><span class="btn btn-primary">R&eacute;server</span></a>
+  </div>
   <div class="nav-burger" id="navBurger"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
@@ -501,7 +504,7 @@ body::after{
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-label" data-reveal>Corniche des Almadies &mdash; Dakar, S&eacute;n&eacute;gal</div>
-    <h1 class="hero-title" data-reveal data-delay=".15">les pieds dans <em>l'eau</em></h1>
+    <h1 class="hero-title" data-reveal data-delay=".15">Le NGOR — les pieds dans <em>l'eau</em></h1>
     <p class="hero-sub" data-reveal data-delay=".3">Fruits de mer &amp; grillades face &agrave; l'oc&eacute;an Atlantique<br>Une seule adresse, mille saveurs</p>
     <div class="hero-ctas" data-reveal data-delay=".45">
       <a href="#reservation" class="magnetic-btn"><span class="btn btn-primary">R&eacute;server une table</span></a>
@@ -518,7 +521,7 @@ body::after{
       <div class="histoire-text">
         <div class="section-label" data-reveal>Notre histoire</div>
         <h2 class="section-title" data-reveal data-delay=".1">une adresse <em>mythique</em> de dakar</h2>
-        <p data-reveal data-delay=".2">Depuis plus de 15 ans, Le Ngor accueille les amoureux de la mer et de la bonne cuisine sur la Corniche des Almadies. Les pieds dans le sable, face &agrave; l'oc&eacute;an Atlantique et aux pirogues color&eacute;es des p&ecirc;cheurs, savourez des produits de la mer d'une fra&icirc;cheur incomparable.</p>
+        <p data-reveal data-delay=".2">Depuis plus de 20 ans, Le Ngor accueille les amoureux de la mer et de la bonne cuisine sur la Corniche des Almadies. Les pieds dans le sable, face &agrave; l'oc&eacute;an Atlantique et aux pirogues color&eacute;es des p&ecirc;cheurs, savourez des produits de la mer d'une fra&icirc;cheur incomparable.</p>
         <p data-reveal data-delay=".25">Ici, chaque table offre une sc&egrave;ne diff&eacute;rente&nbsp;: le spectacle des vagues, les couleurs du couchant, le ballet des pirogues au retour de p&ecirc;che. L'art africain rencontre la brise marine dans un d&eacute;cor unique sign&eacute; Le Ngor.</p>
         <div class="histoire-features">
           <div class="feature-item" data-reveal data-delay=".1">
@@ -535,6 +538,11 @@ body::after{
             <div class="feature-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="20" cy="20" r="8"/><path d="M20 4v5M20 31v5M4 20h5M31 20h5M8.2 8.2l3.5 3.5M28.3 28.3l3.5 3.5M8.2 31.8l3.5-3.5M28.3 11.7l3.5-3.5"/></svg></div>
             <div class="feature-title">Coucher de soleil</div>
             <div class="feature-desc">Le plus beau sunset de Dakar</div>
+          </div>
+          <div class="feature-item" data-reveal data-delay=".4">
+            <div class="feature-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 8c-2 0-8 4-8 12s6 12 8 12 8-4 8-12-6-12-8-12z"/><path d="M14 16h12M14 24h12" opacity=".5"/><circle cx="20" cy="20" r="3" opacity=".4"/></svg></div>
+            <div class="feature-title">Produits locaux</div>
+            <div class="feature-desc">Fraîcheur &amp; circuits courts privilégiés</div>
           </div>
         </div>
       </div>
@@ -561,7 +569,13 @@ body::after{
     <div class="carte-header">
       <div class="section-label" data-reveal>La carte</div>
       <h2 class="section-title" data-reveal data-delay=".1" style="color:var(--white)">produits de la mer &amp; <em>grillades</em></h2>
-      <p data-reveal data-delay=".2" style="font-size:.88rem;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto">Cuisine s&eacute;n&eacute;galaise &amp; m&eacute;diterran&eacute;enne &mdash; produits frais du march&eacute; et de la p&ecirc;che du jour</p>
+      <p data-reveal data-delay=".2" style="font-size:.88rem;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto">Cuisine sénégalaise &amp; méditerranéenne — produits frais du marché et de la pêche du jour</p>
+      <a href="NOTRE-CARTE.pdf" download class="magnetic-btn" data-reveal data-delay=".3" style="margin-top:1.5rem">
+        <span class="btn btn-outline" style="font-size:.68rem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          T&eacute;l&eacute;charger la carte compl&egrave;te (PDF)
+        </span>
+      </a>
     </div>
     <!-- FOOD PHOTO STRIP -->
     <div class="food-strip" data-reveal>
@@ -572,37 +586,55 @@ body::after{
       <div class="food-strip-item"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/24/b1/52/langouste-grillee-et.jpg?w=500&h=-1&s=1" alt="Langouste" loading="lazy"><div class="food-strip-label">Fra&icirc;cheur du jour</div></div>
     </div>
     <div class="carte-tabs" data-reveal>
-      <button class="carte-tab active" data-tab="entrees">Entr&eacute;es</button>
-      <button class="carte-tab" data-tab="mer">Produits de la Mer</button>
-      <button class="carte-tab" data-tab="grillades">Grillades &amp; Plats</button>
+      <button class="carte-tab active" data-tab="entrees">Entrées</button>
+      <button class="carte-tab" data-tab="mer">Poissons &amp; Crustacés</button>
+      <button class="carte-tab" data-tab="grillades">Viandes &amp; Plats</button>
       <button class="carte-tab" data-tab="desserts">Desserts</button>
     </div>
     <div class="carte-category active" id="cat-entrees"><div class="carte-grid">
-      <div class="carte-item" data-reveal><div class="carte-name">Salade Oc&eacute;ane</div><div class="carte-desc">Crevettes, poulpe et saumon marin&eacute;, vinaigrette agrumes</div><div class="carte-price">6 000 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Accras de Morue</div><div class="carte-desc">Beignets croustillants aux &eacute;pices, sauce chien maison</div><div class="carte-price">4 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Tourte Aubergine &amp; Ch&egrave;vre</div><div class="carte-desc">Feuillet&eacute;e aux aubergines grill&eacute;es, fromage de ch&egrave;vre frais</div><div class="carte-price">5 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Hu&icirc;tres de Casamance</div><div class="carte-desc">6 pi&egrave;ces, citron vert et &eacute;chalotes au vinaigre</div><div class="carte-price">7 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Salade Océane</div><div class="carte-desc">Agrumes &amp; pinces de crabe</div><div class="carte-price">5 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Tourte d'Aubergine Grillée</div><div class="carte-desc">Fromage de chèvre &amp; poivrons</div><div class="carte-price">5 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Salade César</div><div class="carte-desc">Poulet pané, parmesan et anchois</div><div class="carte-price">6 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Carpaccio de Lotte</div><div class="carte-desc">Baies roses, sauce basilic citronnée &amp; croûtons frottés à l'ail</div><div class="carte-price">5 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Arancini de Patates Douces</div><div class="carte-desc">Épinards, sauce yaourt &amp; menthe fraîche</div><div class="carte-price">5 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Ceviche de Thon &amp; Lotte</div><div class="carte-desc">Concombre, tomate &amp; lait de coco</div><div class="carte-price">5 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Pastels de Thon</div><div class="carte-desc">Sauce catalane</div><div class="carte-price">4 500 FCFA</div></div>
     </div></div>
     <div class="carte-category" id="cat-mer"><div class="carte-grid">
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Gambas Laqu&eacute;es Mangue-Passion</div><div class="carte-desc">Gambas g&eacute;antes laqu&eacute;es, sauce exotique mangue et fruit de la passion</div><div class="carte-price">12 500 FCFA</div></div>
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Homard Grill&eacute;</div><div class="carte-desc">Homard entier grill&eacute; au beurre d'ail et herbes fra&icirc;ches</div><div class="carte-price">14 500 FCFA</div></div>
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Camerons Sauce Rouille</div><div class="carte-desc">Crevettes royales, sauce rouille de crustac&eacute;s maison</div><div class="carte-price">13 000 FCFA</div></div>
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Plateau Royal de Fruits de Mer</div><div class="carte-desc">Pour 2 &mdash; homard, gambas, hu&icirc;tres, langoustines, bulots</div><div class="carte-price">35 000 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Langouste Grill&eacute;e</div><div class="carte-desc">Langouste fra&icirc;che, beurre citronn&eacute; et riz parfum&eacute;</div><div class="carte-price">16 000 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Filet de Thiof</div><div class="carte-desc">Poisson noble du S&eacute;n&eacute;gal, sauce cr&eacute;ole et l&eacute;gumes du march&eacute;</div><div class="carte-price">9 500 FCFA</div></div>
+      <div class="carte-item featured glass" data-reveal><div class="carte-name">Gambas Laquées</div><div class="carte-desc">Sauce du chef mangue et passion</div><div class="carte-price">12 500 FCFA</div></div>
+      <div class="carte-item featured glass" data-reveal><div class="carte-name">Langouste à la Crème d'Orange</div><div class="carte-desc">Langouste fraîche, 300g</div><div class="carte-price">16 500 FCFA</div></div>
+      <div class="carte-item featured glass" data-reveal><div class="carte-name">Camerones Sauce Rouille</div><div class="carte-desc">Sauce rouille de crustacés maison</div><div class="carte-price">16 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Thiof Entier Grillé</div><div class="carte-desc">Salsa verde</div><div class="carte-price">11 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Filet de Lotte</div><div class="carte-desc">Sauce aux dattes fondante</div><div class="carte-price">7 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Pavé de Thon</div><div class="carte-desc">Réduction balsamique &amp; graines de sésame</div><div class="carte-price">8 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Filet de Capitaine Laqué</div><div class="carte-desc">Sauce moringa</div><div class="carte-price">8 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Dorade Entière Grillée</div><div class="carte-desc">Sauce crémeuse à l'ail</div><div class="carte-price">9 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Calamar Grillés</div><div class="carte-desc">Marinade persil citron</div><div class="carte-price">9 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Crevettes Sauce Citronnée</div><div class="carte-desc">Au gingembre</div><div class="carte-price">9 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Mixte de la Mer</div><div class="carte-desc">Gambas, calamar, lotte — sauce mayo</div><div class="carte-price">10 500 FCFA</div></div>
     </div></div>
     <div class="carte-category" id="cat-grillades"><div class="carte-grid">
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Souris d'Agneau au Miel</div><div class="carte-desc">Confite au miel et &eacute;pices douces, pur&eacute;e maison</div><div class="carte-price">11 000 FCFA</div></div>
-      <div class="carte-item featured glass" data-reveal><div class="carte-name">Thieboudienne Traditionnel</div><div class="carte-desc">Le plat national revisit&eacute;, poisson frais du jour</div><div class="carte-price">8 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Brochettes Mixtes</div><div class="carte-desc">B&oelig;uf, poulet et gambas, l&eacute;gumes grill&eacute;s, chimichurri</div><div class="carte-price">10 000 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Poulet Yassa</div><div class="carte-desc">Marin&eacute; aux oignons et citron, recette casamancaise</div><div class="carte-price">7 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Entrec&ocirc;te Grill&eacute;e</div><div class="carte-desc">Grill&eacute;e au feu de bois, frites maison et salade</div><div class="carte-price">12 000 FCFA</div></div>
+      <div class="carte-item featured glass" data-reveal><div class="carte-name">Souris d'Agneau Confite</div><div class="carte-desc">Au romarin, écrasée de patates douces</div><div class="carte-price">13 500 FCFA</div></div>
+      <div class="carte-item featured glass" data-reveal><div class="carte-name">Côte de Bœuf Braisée</div><div class="carte-desc">Sauce poivre vert</div><div class="carte-price">14 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Entrecôte Grillée</div><div class="carte-desc">Brésil, sauce bleu</div><div class="carte-price">10 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Filet de Bœuf</div><div class="carte-desc">Sauce champignons forestier</div><div class="carte-price">11 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Brochette de Poulet Marinée</div><div class="carte-desc">Piquée au gingembre, crème de bouye</div><div class="carte-price">9 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Cuisse de Poulet</div><div class="carte-desc">Sauce yassa</div><div class="carte-price">6 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Tagliatelles de la Mer</div><div class="carte-desc">Sauce rouille de crustacé</div><div class="carte-price">10 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Linguine aux Palourdes</div><div class="carte-desc"></div><div class="carte-price">10 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Spaghettis Bolognais</div><div class="carte-desc"></div><div class="carte-price">7 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Ravioles de Gambas</div><div class="carte-desc">Sauce bisque</div><div class="carte-price">11 000 FCFA</div></div>
     </div></div>
     <div class="carte-category" id="cat-desserts"><div class="carte-grid">
-      <div class="carte-item" data-reveal><div class="carte-name">Tiramisu Maison</div><div class="carte-desc">Mascarpone onctueuse et caf&eacute; italien</div><div class="carte-price">4 000 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Fondant au Chocolat</div><div class="carte-desc">C&oelig;ur coulant au chocolat noir, glace vanille</div><div class="carte-price">4 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Salade de Fruits Frais</div><div class="carte-desc">Fruits tropicaux de saison, sirop de menthe</div><div class="carte-price">3 500 FCFA</div></div>
-      <div class="carte-item" data-reveal><div class="carte-name">Cr&egrave;me Br&ucirc;l&eacute;e Coco</div><div class="carte-desc">Infus&eacute;e au lait de coco, caramel croquant</div><div class="carte-price">4 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Cheese Cake Spéculos</div><div class="carte-desc"></div><div class="carte-price">5 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Panna Cotta aux Fruits de la Passion</div><div class="carte-desc"></div><div class="carte-price">5 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Entremet Bissap &amp; Chocolat Blanc</div><div class="carte-desc"></div><div class="carte-price">5 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Profiteroles Framboise</div><div class="carte-desc">Coulis chocolat, chantilly &amp; amandes</div><div class="carte-price">5 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Coupe Brownie</div><div class="carte-desc">Boule vanille et chocolat, coulis chocolat, chantilly &amp; brownie maison</div><div class="carte-price">6 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Gaufre Liégeoise</div><div class="carte-desc">Boule vanille, coulis chocolat, chantilly, noisettes</div><div class="carte-price">6 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Crêpe Nutella</div><div class="carte-desc"></div><div class="carte-price">3 500 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Crêpe</div><div class="carte-desc">Miel, citron ou sucre</div><div class="carte-price">3 000 FCFA</div></div>
+      <div class="carte-item" data-reveal><div class="carte-name">Boule de Glace</div><div class="carte-desc">Vanille, fraise, chocolat, caramel, café, pistache — Sorbet: framboise, passion, citron, mangue</div><div class="carte-price">2 000 FCFA</div></div>
     </div></div>
   </div>
 </section>
@@ -617,10 +649,10 @@ body::after{
       </div>
       <div class="signature-text">
         <div class="section-label" data-reveal>Le plat embl&eacute;matique</div>
-        <h2 class="section-title" data-reveal data-delay=".1" style="color:var(--white)">langouste grill&eacute;e <em>du ngor</em></h2>
-        <p class="signature-desc" data-reveal data-delay=".2">Langouste fra&icirc;che p&ecirc;ch&eacute;e au large de la Corniche, grill&eacute;e &agrave; la perfection au feu de bois avec un beurre citronn&eacute; aux herbes. Servie avec notre riz parfum&eacute; maison et l&eacute;gumes de saison du march&eacute; de Soumbedioune.</p>
+        <h2 class="section-title" data-reveal data-delay=".1" style="color:var(--white)">langouste à la crème <em>d'orange</em></h2>
+        <p class="signature-desc" data-reveal data-delay=".2">Langouste fraîche pêchée au large de la Corniche, servie avec une onctueuse crème d'orange maison. Un classique revisité du Ngor, depuis 2004.</p>
         <div data-reveal data-delay=".3">
-          <div class="signature-price">16 000 FCFA</div>
+          <div class="signature-price">16 500 FCFA</div>
           <div class="signature-price-label">Pour une personne</div>
         </div>
       </div>
@@ -765,14 +797,13 @@ body::after{
   <div class="container">
     <div class="reservation-grid">
       <div>
-        <div class="section-label" data-reveal>R&eacute;servation</div>
-        <h2 class="section-title" data-reveal data-delay=".1" style="color:var(--white)">r&eacute;servez votre <em>table</em></h2>
-        <p data-reveal data-delay=".2" style="font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:3rem;line-height:1.85">Pour une soir&eacute;e romantique, un d&icirc;ner entre amis ou un &eacute;v&eacute;nement priv&eacute; sur la Corniche des Almadies.</p>
+        <div class="section-label" data-reveal>R&eacute;server votre table</div>
+        <h2 class="section-title" data-reveal data-delay=".1" style="color:var(--white)">contact &amp; <em>r&eacute;servation</em></h2>
+        <p data-reveal data-delay=".2" style="font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:3rem;line-height:1.85">Pour une soirée romantique ou un dîner entre amis — réserver directement via WhatsApp.</p>
         <div class="reservation-detail" data-reveal><div class="reservation-detail-label">T&eacute;l&eacute;phone</div><div class="reservation-detail-value"><a href="tel:+221775043006">+221 77 504 30 06</a></div></div>
-        <div class="reservation-detail" data-reveal><div class="reservation-detail-label">Email</div><div class="reservation-detail-value"><a href="mailto:restaurantlengor@hotmail.com">restaurantlengor@hotmail.com</a></div></div>
         <div class="reservation-detail" data-reveal><div class="reservation-detail-label">Adresse</div><div class="reservation-detail-value"><a href="https://maps.google.com/?q=Le+Ngor+Pieds+dans+l'eau+Dakar" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem">Corniche des Almadies, Dakar 12000 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
         <div class="reservation-detail" data-reveal><div class="reservation-detail-label">Horaires</div><div class="reservation-detail-value">10h &mdash; 01h &bull; Ferm&eacute; le mardi</div></div>
-        <a href="https://wa.me/221775043006" target="_blank" rel="noopener" class="magnetic-btn" data-reveal style="margin-top:.5rem">
+        <a href="https://wa.me/221775043006" target="_blank" rel="noopener" class="magnetic-btn" data-reveal style="margin-top:1.5rem">
           <span class="btn btn-primary" style="background:#25D366;color:#fff;font-weight:500">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             R&eacute;server sur WhatsApp</span>
@@ -784,20 +815,27 @@ body::after{
         </div>
       </div>
       <div class="glass-strong" style="padding:2.5rem;border-radius:12px">
-        <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Merci ! Nous vous contacterons.';this.querySelector('button').disabled=true">
-          <div class="form-group" data-reveal><label>Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
-          <div class="form-row">
-            <div class="form-group" data-reveal><label>T&eacute;l&eacute;phone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
-            <div class="form-group" data-reveal><label>Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
+        <div style="text-align:center;margin-bottom:2rem">
+          <div class="section-label" data-reveal style="color:var(--accent)">&Eacute;v&eacute;nements priv&eacute;s</div>
+          <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.5rem">mariages, cocktails &amp; anniversaires</h3>
+          <p data-reveal data-delay=".2" style="font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7">Un cadre exceptionnel pour vos &eacute;v&eacute;nements sur la Corniche des Almadies. Contactez-nous par email pour un devis personnalis&eacute;.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem" data-reveal data-delay=".3">
+          <a href="mailto:restaurantlengor@hotmail.com?subject=Demande%20%C3%A9v%C3%A9nement%20-%20Le%20Ngor" class="magnetic-btn" style="width:100%">
+            <span class="btn btn-primary" style="width:100%;justify-content:center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Demander un devis par email
+            </span>
+          </a>
+          <div style="text-align:center;font-size:.8rem;color:rgba(255,255,255,.4)">restaurantlengor@hotmail.com</div>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08)" data-reveal data-delay=".4">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;text-align:center">
+            <div><div style="font-family:var(--serif);font-size:1.3rem;color:var(--accent)">💍</div><div style="font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.3rem;letter-spacing:.08em;text-transform:uppercase">Mariages</div></div>
+            <div><div style="font-family:var(--serif);font-size:1.3rem;color:var(--accent)">🥂</div><div style="font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.3rem;letter-spacing:.08em;text-transform:uppercase">Cocktails</div></div>
+            <div><div style="font-family:var(--serif);font-size:1.3rem;color:var(--accent)">🎂</div><div style="font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.3rem;letter-spacing:.08em;text-transform:uppercase">Anniversaires</div></div>
           </div>
-          <div class="form-row">
-            <div class="form-group" data-reveal><label>Date &amp; Heure</label><input type="datetime-local" name="date" required></div>
-            <div class="form-group" data-reveal><label>Convives</label><select name="convives" required><option value="">Choisir</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10+</option></select></div>
-          </div>
-          <div class="form-group" data-reveal><label>Occasion</label><select name="occasion"><option value="">Choisir (optionnel)</option><option>D&icirc;ner romantique</option><option>Anniversaire</option><option>&Eacute;v&eacute;nement priv&eacute;</option><option>Rooftop</option><option>Autre</option></select></div>
-          <div class="form-group" data-reveal><label>Message</label><textarea name="message" placeholder="Demandes sp&eacute;ciales..."></textarea></div>
-          <button type="submit" class="magnetic-btn" data-reveal style="width:100%"><span class="btn btn-primary" style="width:100%;justify-content:center">Envoyer la demande</span></button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -928,6 +966,197 @@ document.querySelectorAll('.carte-tab').forEach(tab=>{
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.onclick=e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}};
 });
+
+/* LANGUAGE SWITCHER */
+const translations={
+  fr:{
+    heroLabel:"Corniche des Almadies — Dakar, Sénégal",
+    heroTitle:'Le NGOR — les pieds dans <em>l\'eau</em>',
+    heroSub:"Fruits de mer & grillades face à l'océan Atlantique<br>Une seule adresse, mille saveurs",
+    heroCta1:"Réserver une table",heroCta2:"Découvrir la carte",
+    heroScroll:"Découvrir",
+    navHistoire:"Notre histoire",navCarte:"La carte",navExp:"L'expérience",navGalerie:"Galerie",navContact:"Contact",navReserver:"Réserver",
+    histLabel:"Notre histoire",histTitle:'une adresse <em>mythique</em> de dakar',
+    histP1:"Depuis plus de 20 ans, Le Ngor accueille les amoureux de la mer et de la bonne cuisine sur la Corniche des Almadies. Les pieds dans le sable, face à l'océan Atlantique et aux pirogues colorées des pêcheurs, savourez des produits de la mer d'une fraîcheur incomparable.",
+    histP2:"Ici, chaque table offre une scène différente : le spectacle des vagues, les couleurs du couchant, le ballet des pirogues au retour de pêche. L'art africain rencontre la brise marine dans un décor unique signé Le Ngor.",
+    f1:"Bord de mer",f1d:"Tables face à l'océan Atlantique",
+    f2:"Décor artisanal",f2d:"Sculptures, mosaïques & art africain",
+    f3:"Coucher de soleil",f3d:"Le plus beau sunset de Dakar",
+    f4:"Produits locaux",f4d:"Fraîcheur & circuits courts privilégiés",
+    carteLabel:"La carte",carteTitle:'produits de la mer & <em>grillades</em>',carteDesc:"Cuisine sénégalaise & méditerranéenne — produits frais du marché et de la pêche du jour",
+    carteDl:"Télécharger la carte complète (PDF)",
+    tab1:"Entrées",tab2:"Poissons & Crustacés",tab3:"Viandes & Plats",tab4:"Desserts",
+    pb1:"« Une seule adresse, mille saveurs »",pb2:"« Le plus beau coucher de soleil de la Corniche »",
+    sigLabel:"Le plat emblématique",sigTitle:'langouste à la crème <em>d\'orange</em>',
+    sigDesc:"Langouste fraîche pêchée au large de la Corniche, servie avec une onctueuse crème d'orange maison. Un classique revisité du Ngor, depuis 2004.",
+    sigPrice:"Pour une personne",
+    expLabel:"L'expérience",expTitle:"l'expérience le ngor",expDesc:"Un cadre unique entre ciel et mer",
+    c1:"Années sur la Corniche",c2:"Avis TripAdvisor",c3:"Restaurant à Dakar",c4:"Abonnés Instagram",
+    temLabel:"Témoignages",temTitle:'ce qu\'ils <em>en disent</em>',
+    galLabel:"Galerie",galTitle:'instantanés du <em>ngor</em>',
+    resLabel:"Réserver votre table",resTitle:'contact & <em>réservation</em>',resDesc:"Pour une soirée romantique ou un dîner entre amis — réserver directement via WhatsApp.",
+    resTel:"Téléphone",resAddr:"Adresse",resHours:"Horaires",resHoursVal:"10h — 01h • Fermé le mardi",
+    resWa:"Réserver sur WhatsApp",
+    evtLabel:"Événements privés",evtTitle:"mariages, cocktails & anniversaires",
+    evtDesc:"Un cadre exceptionnel pour vos événements sur la Corniche des Almadies. Contactez-nous par email pour un devis personnalisé.",
+    evtBtn:"Demander un devis par email",
+    evt1:"Mariages",evt2:"Cocktails",evt3:"Anniversaires",
+    footerTag:"Pieds dans l'eau — Corniche des Almadies, Dakar",footerMap:"Voir sur Google Maps",
+    footerHours:"Ouvert tous les jours de 10h à 01h — Fermé le mardi",
+    footerCredit:'Site conçu par',footerCopy:"© 2026 Le Ngor Restaurant. Tous droits réservés."
+  },
+  en:{
+    heroLabel:"Corniche des Almadies — Dakar, Senegal",
+    heroTitle:'Le NGOR — with your feet in <em>the water</em>',
+    heroSub:"Seafood & grills facing the Atlantic Ocean<br>One address, a thousand flavors",
+    heroCta1:"Book a table",heroCta2:"Discover the menu",
+    heroScroll:"Discover",
+    navHistoire:"Our story",navCarte:"The menu",navExp:"The experience",navGalerie:"Gallery",navContact:"Contact",navReserver:"Book",
+    histLabel:"Our story",histTitle:'a <em>legendary</em> address in dakar',
+    histP1:"For over 20 years, Le Ngor has welcomed lovers of the sea and fine dining on the Corniche des Almadies. With your feet in the sand, facing the Atlantic Ocean and the colorful pirogues of the fishermen, savor seafood of incomparable freshness.",
+    histP2:"Here, every table offers a different scene: the spectacle of the waves, the colors of the sunset, the ballet of pirogues returning from fishing. African art meets the sea breeze in a unique setting signed Le Ngor.",
+    f1:"Seaside",f1d:"Tables facing the Atlantic Ocean",
+    f2:"Artisan décor",f2d:"Sculptures, mosaics & African art",
+    f3:"Sunset",f3d:"The most beautiful sunset in Dakar",
+    f4:"Local products",f4d:"Freshness & short supply chains",
+    carteLabel:"The menu",carteTitle:'seafood & <em>grills</em>',carteDesc:"Senegalese & Mediterranean cuisine — fresh market products and daily catch",
+    carteDl:"Download the full menu (PDF)",
+    tab1:"Starters",tab2:"Fish & Shellfish",tab3:"Meats & Mains",tab4:"Desserts",
+    pb1:"« One address, a thousand flavors »",pb2:"« The most beautiful sunset on the Corniche »",
+    sigLabel:"The signature dish",sigTitle:'lobster in <em>orange cream</em>',
+    sigDesc:"Fresh lobster caught off the Corniche, served with a homemade orange cream. A classic reimagined at Le Ngor, since 2004.",
+    sigPrice:"Per person",
+    expLabel:"The experience",expTitle:"the le ngor experience",expDesc:"A unique setting between sky and sea",
+    c1:"Years on the Corniche",c2:"TripAdvisor Reviews",c3:"Restaurant in Dakar",c4:"Instagram Followers",
+    temLabel:"Testimonials",temTitle:'what they <em>say</em>',
+    galLabel:"Gallery",galTitle:'snapshots of <em>the ngor</em>',
+    resLabel:"Book your table",resTitle:'contact & <em>reservations</em>',resDesc:"For a romantic evening or dinner with friends — book directly via WhatsApp.",
+    resTel:"Phone",resAddr:"Address",resHours:"Hours",resHoursVal:"10am — 1am • Closed on Tuesdays",
+    resWa:"Book on WhatsApp",
+    evtLabel:"Private events",evtTitle:"weddings, cocktails & birthdays",
+    evtDesc:"An exceptional setting for your events on the Corniche des Almadies. Contact us by email for a personalized quote.",
+    evtBtn:"Request a quote by email",
+    evt1:"Weddings",evt2:"Cocktails",evt3:"Birthdays",
+    footerTag:"Feet in the water — Corniche des Almadies, Dakar",footerMap:"View on Google Maps",
+    footerHours:"Open every day from 10am to 1am — Closed on Tuesdays",
+    footerCredit:'Website designed by',footerCopy:"© 2026 Le Ngor Restaurant. All rights reserved."
+  }
+};
+let currentLang='fr';
+document.getElementById('langToggle').onclick=function(){
+  currentLang=currentLang==='fr'?'en':'fr';
+  this.textContent=currentLang==='fr'?'EN':'FR';
+  const t=translations[currentLang];
+  // Hero
+  const heroLabel=document.querySelector('.hero-label');
+  if(heroLabel)heroLabel.innerHTML=t.heroLabel;
+  const heroTitle=document.querySelector('.hero-title');
+  if(heroTitle)heroTitle.innerHTML=t.heroTitle;
+  const heroSub=document.querySelector('.hero-sub');
+  if(heroSub)heroSub.innerHTML=t.heroSub;
+  const heroCtas=document.querySelectorAll('.hero-ctas .btn');
+  if(heroCtas[0])heroCtas[0].textContent=t.heroCta1;
+  if(heroCtas[1])heroCtas[1].textContent=t.heroCta2;
+  const heroScroll=document.querySelector('.hero-scroll span');
+  if(heroScroll)heroScroll.textContent=t.heroScroll;
+  // Nav
+  const navLinks=document.querySelectorAll('.nav-links a');
+  if(navLinks[0])navLinks[0].textContent=t.navHistoire;
+  if(navLinks[1])navLinks[1].textContent=t.navCarte;
+  if(navLinks[2])navLinks[2].textContent=t.navExp;
+  if(navLinks[3])navLinks[3].textContent=t.navGalerie;
+  if(navLinks[4])navLinks[4].textContent=t.navContact;
+  const mobLinks=document.querySelectorAll('.mob-link');
+  if(mobLinks[0])mobLinks[0].textContent=t.navHistoire;
+  if(mobLinks[1])mobLinks[1].textContent=t.navCarte;
+  if(mobLinks[2])mobLinks[2].textContent=t.navExp;
+  if(mobLinks[3])mobLinks[3].textContent=t.navGalerie;
+  if(mobLinks[4])mobLinks[4].textContent=t.navReserver;
+  // Histoire
+  const histSection=document.getElementById('histoire');
+  if(histSection){
+    const sl=histSection.querySelector('.section-label');if(sl)sl.textContent=t.histLabel;
+    const st=histSection.querySelector('.section-title');if(st)st.innerHTML=t.histTitle;
+    const ps=histSection.querySelectorAll('.histoire-text > p');
+    if(ps[0])ps[0].textContent=t.histP1;if(ps[1])ps[1].textContent=t.histP2;
+    const fi=histSection.querySelectorAll('.feature-item');
+    if(fi[0]){fi[0].querySelector('.feature-title').textContent=t.f1;fi[0].querySelector('.feature-desc').textContent=t.f1d;}
+    if(fi[1]){fi[1].querySelector('.feature-title').textContent=t.f2;fi[1].querySelector('.feature-desc').textContent=t.f2d;}
+    if(fi[2]){fi[2].querySelector('.feature-title').textContent=t.f3;fi[2].querySelector('.feature-desc').textContent=t.f3d;}
+    if(fi[3]){fi[3].querySelector('.feature-title').textContent=t.f4;fi[3].querySelector('.feature-desc').textContent=t.f4d;}
+  }
+  // Carte
+  const carteSection=document.getElementById('carte');
+  if(carteSection){
+    const sl=carteSection.querySelector('.section-label');if(sl)sl.textContent=t.carteLabel;
+    const st=carteSection.querySelector('.section-title');if(st)st.innerHTML=t.carteTitle;
+    const dp=carteSection.querySelector('.carte-header > p');if(dp)dp.textContent=t.carteDesc;
+    const dl=carteSection.querySelector('.carte-header .btn');if(dl)dl.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> '+t.carteDl;
+    const tabs=carteSection.querySelectorAll('.carte-tab');
+    if(tabs[0])tabs[0].textContent=t.tab1;if(tabs[1])tabs[1].textContent=t.tab2;
+    if(tabs[2])tabs[2].textContent=t.tab3;if(tabs[3])tabs[3].textContent=t.tab4;
+  }
+  // Photo breaks
+  const pbs=document.querySelectorAll('.photo-break-text');
+  if(pbs[0])pbs[0].textContent=t.pb1;if(pbs[1])pbs[1].textContent=t.pb2;
+  // Signature
+  const sigSection=document.querySelector('.signature-section');
+  if(sigSection){
+    const sl=sigSection.querySelector('.section-label');if(sl)sl.textContent=t.sigLabel;
+    const st=sigSection.querySelector('.section-title');if(st)st.innerHTML=t.sigTitle;
+    const sd=sigSection.querySelector('.signature-desc');if(sd)sd.textContent=t.sigDesc;
+    const spl=sigSection.querySelector('.signature-price-label');if(spl)spl.textContent=t.sigPrice;
+  }
+  // Experience
+  const expSection=document.getElementById('experience');
+  if(expSection){
+    const sl=expSection.querySelector('.section-label');if(sl)sl.textContent=t.expLabel;
+    const st=expSection.querySelector('.section-title');if(st)st.innerHTML=t.expTitle;
+    const dp=expSection.querySelector('.exp-header > p');if(dp)dp.textContent=t.expDesc;
+  }
+  // Chiffres
+  const cl=document.querySelectorAll('.chiffre-label');
+  if(cl[0])cl[0].textContent=t.c1;if(cl[1])cl[1].textContent=t.c2;
+  if(cl[2])cl[2].textContent=t.c3;if(cl[3])cl[3].textContent=t.c4;
+  // Témoignages
+  const temSection=document.getElementById('temoignages');
+  if(temSection){
+    const sl=temSection.querySelector('.section-label');if(sl)sl.textContent=t.temLabel;
+    const st=temSection.querySelector('.section-title');if(st)st.innerHTML=t.temTitle;
+  }
+  // Galerie
+  const galSection=document.getElementById('galerie');
+  if(galSection){
+    const sl=galSection.querySelector('.section-label');if(sl)sl.textContent=t.galLabel;
+    const st=galSection.querySelector('.section-title');if(st)st.innerHTML=t.galTitle;
+  }
+  // Réservation
+  const resSection=document.getElementById('reservation');
+  if(resSection){
+    const sl=resSection.querySelector('.section-label');if(sl)sl.textContent=t.resLabel;
+    const st=resSection.querySelector('.section-title');if(st)st.innerHTML=t.resTitle;
+    const dp=resSection.querySelector('.reservation-grid > div > p');if(dp)dp.textContent=t.resDesc;
+    const dl=resSection.querySelectorAll('.reservation-detail-label');
+    if(dl[0])dl[0].textContent=t.resTel;if(dl[1])dl[1].textContent=t.resAddr;if(dl[2])dl[2].textContent=t.resHours;
+    const hv=resSection.querySelectorAll('.reservation-detail-value');
+    if(hv[2])hv[2].textContent=t.resHoursVal;
+    const wa=resSection.querySelector('.btn-primary[style*="25D366"]');
+    if(wa){wa.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> '+t.resWa;}
+    // Events
+    const evtL=resSection.querySelector('.section-label[style*="accent"]');if(evtL)evtL.textContent=t.evtLabel;
+    const evtH=resSection.querySelector('h3');if(evtH)evtH.textContent=t.evtTitle;
+    const evtP=resSection.querySelector('.glass-strong p');if(evtP)evtP.textContent=t.evtDesc;
+    const evtB=resSection.querySelector('.glass-strong .btn-primary');if(evtB)evtB.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> '+t.evtBtn;
+    const evts=resSection.querySelectorAll('.glass-strong [style*="text-transform:uppercase"]');
+    if(evts[0])evts[0].textContent=t.evt1;if(evts[1])evts[1].textContent=t.evt2;if(evts[2])evts[2].textContent=t.evt3;
+  }
+  // Footer
+  const ft=document.querySelector('.footer-tagline');if(ft)ft.textContent=t.footerTag;
+  const fm=document.querySelector('.footer-map');if(fm)fm.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> '+t.footerMap;
+  const fh=document.querySelector('.footer-hours');if(fh)fh.textContent=t.footerHours;
+  const fc=document.querySelector('.footer-credit');if(fc)fc.innerHTML=t.footerCredit+' <a href="https://drhelminah.com" target="_blank" rel="noopener">Dr Helminah</a>';
+  const fco=document.querySelector('.footer-copy');if(fco)fco.textContent=t.footerCopy;
+};
 </script>
 </body>
 </html>
