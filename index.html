@@ -629,6 +629,62 @@ body::after{
   .particle{display:none}
 }
 
+/* HERO TITLE ANIMATIONS - PREMIUM */
+.hero-title .char{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(60px) rotateX(-40deg);
+  transform-origin:bottom center;
+  will-change:transform,opacity
+}
+.hero-title .word{display:inline-block;white-space:nowrap}
+.hero-title .char-space{width:.25em;display:inline-block}
+
+/* Water shimmer on "l'eau" */
+.hero-title .eau-word .char{
+  background:linear-gradient(90deg,var(--accent2),#FFAA00,var(--accent),var(--accent2));
+  background-size:300% 100%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:eauShimmer 4s ease-in-out infinite;
+  animation-play-state:paused
+}
+.hero-title.revealed .eau-word .char{animation-play-state:running}
+@keyframes eauShimmer{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Wave underline under title */
+.hero-title-wave{
+  display:block;width:0;max-width:320px;height:20px;margin:1rem auto 0;
+  overflow:visible;opacity:0
+}
+.hero-title-wave svg{width:100%;height:100%}
+
+/* Magnetic text - individual chars follow cursor */
+@media(hover:hover){
+  .hero-title .char{
+    transition:transform .35s cubic-bezier(.25,.46,.45,.94)
+  }
+}
+
+/* Glow pulse on title after reveal */
+.hero-title.revealed{
+  animation:titleGlow 3s 2s ease-in-out infinite
+}
+@keyframes titleGlow{
+  0%,100%{filter:drop-shadow(0 0 0 transparent)}
+  50%{filter:drop-shadow(0 0 30px rgba(90,171,184,.15))}
+}
+
+/* Stagger delay utility */
+.hero-title .char:nth-child(1){--char-delay:.1s}
+.hero-title .char:nth-child(2){--char-delay:.13s}
+.hero-title .char:nth-child(3){--char-delay:.16s}
+
 /* LOADING SKELETON */
 .skeleton{
   background:linear-gradient(90deg,rgba(255,255,255,.03) 25%,rgba(255,255,255,.06) 50%,rgba(255,255,255,.03) 75%);
@@ -721,6 +777,13 @@ body::after{
   <div class="hero-content">
     <div class="hero-label" data-reveal>Corniche des Almadies &mdash; Dakar, S&eacute;n&eacute;gal</div>
     <h1 class="hero-title" data-reveal data-delay=".15">Le Ngor — pieds dans <em>l'eau</em></h1>
+    <div class="hero-title-wave">
+      <svg viewBox="0 0 320 20" preserveAspectRatio="none">
+        <path d="M0,10 C20,4 40,4 60,10 S100,16 120,10 S160,4 180,10 S220,16 240,10 S280,4 300,10 S320,10 320,10" fill="none" stroke="rgba(90,171,184,.5)" stroke-width="1.5">
+          <animate attributeName="d" dur="3s" repeatCount="indefinite" values="M0,10 C20,4 40,4 60,10 S100,16 120,10 S160,4 180,10 S220,16 240,10 S280,4 300,10 S320,10 320,10;M0,10 C20,16 40,16 60,10 S100,4 120,10 S160,16 180,10 S220,4 240,10 S280,16 300,10 S320,10 320,10;M0,10 C20,4 40,4 60,10 S100,16 120,10 S160,4 180,10 S220,16 240,10 S280,4 300,10 S320,10 320,10"/>
+        </path>
+      </svg>
+    </div>
     <p class="hero-sub" data-reveal data-delay=".3">Fruits de mer &amp; grillades face &agrave; l'oc&eacute;an Atlantique<br>Une seule adresse, mille saveurs</p>
     <div class="hero-ctas" data-reveal data-delay=".45">
       <a href="#reservation" class="magnetic-btn"><span class="btn btn-primary">R&eacute;server une table</span></a>
@@ -1106,6 +1169,88 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{document.getElementById('pageLoader').classList.add('hidden')},2800);
 });
 
+/* ====== HERO TITLE SPLIT TEXT ANIMATION ====== */
+window._heroSplitText=function(el){
+  const html=el.innerHTML;
+  const parts=html.split(/(\s+)/);
+  let result='';
+  let charIndex=0;
+
+  parts.forEach(part=>{
+    if(part.match(/^\s+$/)){
+      result+='<span class="char-space"></span>';
+      return;
+    }
+    const isEm=part.includes('<em>');
+    if(isEm) part=part.replace(/<\/?em>/g,'');
+    const wordClass=isEm?'word eau-word':'word';
+    result+=`<span class="${wordClass}">`;
+    for(let i=0;i<part.length;i++){
+      const ch=part[i]==='&'?(part.substring(i).match(/&\w+;/)||[''])[0]:part[i];
+      if(ch.startsWith('&')){
+        result+=`<span class="char" style="--ci:${charIndex}">${ch}</span>`;
+        i+=ch.length-2;
+      }else{
+        result+=`<span class="char" style="--ci:${charIndex}">${part[i]}</span>`;
+      }
+      charIndex++;
+    }
+    result+='</span>';
+  });
+  el.innerHTML=result;
+  return el.querySelectorAll('.char');
+};
+
+(function heroTitleAnimation(){
+  const titleEl=document.querySelector('.hero-title');
+  if(!titleEl)return;
+
+  const chars=window._heroSplitText(titleEl);
+
+  titleEl.removeAttribute('data-reveal');
+  titleEl.style.opacity='1';
+  titleEl.style.transform='none';
+
+  setTimeout(()=>{
+    gsap.fromTo(chars,
+      {opacity:0,y:60,rotateX:-40,scale:0.8},
+      {
+        opacity:1,y:0,rotateX:0,scale:1,
+        duration:0.7,ease:'back.out(1.5)',
+        stagger:{each:0.035,from:'start'},
+        onComplete:()=>{
+          titleEl.classList.add('revealed');
+          const wave=document.querySelector('.hero-title-wave');
+          if(wave) gsap.to(wave,{width:'100%',opacity:1,duration:0.8,ease:'power2.out'});
+        }
+      }
+    );
+  },3000);
+
+  if(matchMedia('(pointer:fine)').matches){
+    document.addEventListener('mousemove',(e)=>{
+      titleEl.querySelectorAll('.char').forEach(char=>{
+        const rect=char.getBoundingClientRect();
+        const cx=rect.left+rect.width/2;
+        const cy=rect.top+rect.height/2;
+        const dx=e.clientX-cx;
+        const dy=e.clientY-cy;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<200){
+          const s=(1-dist/200)*8;
+          char.style.transform=`translate(${dx/dist*s}px,${dy/dist*s}px)`;
+        }else{char.style.transform=''}
+      });
+    });
+  }
+
+  setTimeout(()=>{
+    titleEl.querySelectorAll('.eau-word .char').forEach((ch,i)=>{
+      gsap.to(ch,{y:-4,duration:2+i*0.3,ease:'sine.inOut',repeat:-1,yoyo:true,delay:i*0.2});
+    });
+  },4500);
+})();
+
 /* SCROLL PROGRESS */
 const sp=document.getElementById('scrollProgress');
 window.addEventListener('scroll',()=>{
@@ -1309,7 +1454,12 @@ document.getElementById('langToggle').onclick=function(){
   const heroLabel=document.querySelector('.hero-label');
   if(heroLabel)heroLabel.innerHTML=t.heroLabel;
   const heroTitle=document.querySelector('.hero-title');
-  if(heroTitle)heroTitle.innerHTML=t.heroTitle;
+  if(heroTitle){
+    heroTitle.innerHTML=t.heroTitle;
+    heroTitle.classList.remove('revealed');
+    window._heroSplitText(heroTitle);
+    gsap.fromTo(heroTitle.querySelectorAll('.char'),{opacity:0,y:30},{opacity:1,y:0,duration:.5,stagger:.025,ease:'power2.out',onComplete:()=>heroTitle.classList.add('revealed')});
+  }
   const heroSub=document.querySelector('.hero-sub');
   if(heroSub)heroSub.innerHTML=t.heroSub;
   const heroCtas=document.querySelectorAll('.hero-ctas .btn');
