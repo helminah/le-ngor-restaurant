@@ -464,10 +464,202 @@ body::after{
   .loader-scene{width:180px;height:140px}
   .loader-logo{font-size:2.2rem}
   .hero-label{font-size:.58rem;padding:.4rem .8rem;letter-spacing:.25em}
+  .mobile-sticky-cta{display:flex}
+}
+
+/* ====== NEW ENHANCEMENTS ====== */
+
+/* TOUCH FEEDBACK - mobile tap ripple */
+.touch-ripple{
+  position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent
+}
+.touch-ripple::after{
+  content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--ripple-x,50%) var(--ripple-y,50%),rgba(90,171,184,.3) 0%,transparent 60%);
+  opacity:0;transition:opacity .15s;pointer-events:none
+}
+.touch-ripple:active::after{opacity:1}
+@media(hover:none){
+  .carte-item,.exp-card,.galerie-item,.temoignage-card{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .carte-item:active{transform:scale(.98);transition:transform .1s}
+  .btn:active{transform:scale(.96)!important;transition:transform .1s}
+}
+
+/* FLOATING WHATSAPP BUTTON - mobile */
+.whatsapp-float{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;color:#fff;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4),0 0 0 0 rgba(37,211,102,.3);
+  transition:transform .3s,box-shadow .3s;
+  animation:whatsappPulse 3s ease-in-out infinite
+}
+.whatsapp-float svg{width:28px;height:28px;fill:currentColor}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(37,211,102,.5)}
+.whatsapp-float:active{transform:scale(.95)}
+@keyframes whatsappPulse{
+  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4),0 0 0 0 rgba(37,211,102,.3)}
+  50%{box-shadow:0 4px 20px rgba(37,211,102,.4),0 0 0 12px rgba(37,211,102,0)}
+}
+@media(max-width:768px){
+  .whatsapp-float{display:flex}
+}
+
+/* STICKY MOBILE CTA BAR */
+.mobile-sticky-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:998;
+  display:none;
+  padding:.8rem 1rem;
+  background:rgba(8,14,26,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid rgba(90,171,184,.15);
+  justify-content:center;gap:.8rem;
+  transform:translateY(100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94)
+}
+.mobile-sticky-cta.visible{transform:translateY(0)}
+.mobile-sticky-cta .btn{padding:.7rem 1.5rem;font-size:.7rem}
+@media(max-width:768px){
+  .mobile-sticky-cta{display:flex}
+}
+
+/* GALLERY LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;z-index:10002;
+  background:rgba(8,14,26,.95);
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .4s
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox img{
+  max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px;
+  transform:scale(.9);transition:transform .4s cubic-bezier(.25,.46,.45,.94)
+}
+.lightbox.open img{transform:scale(1)}
+.lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:var(--white);font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s
+}
+.lightbox-close:hover{background:rgba(255,255,255,.2);border-color:var(--accent)}
+.lightbox-caption{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:1rem;font-style:italic;color:rgba(255,255,255,.7);
+  text-align:center
+}
+
+/* WAVE SECTION DIVIDER */
+.wave-divider{
+  position:relative;height:80px;overflow:hidden;
+  background:var(--dark)
+}
+.wave-divider svg{
+  position:absolute;bottom:0;width:100%;height:80px
+}
+
+/* SECTION HEADER GLOW */
+.section-header-glow{
+  position:relative
+}
+.section-header-glow::before{
+  content:'';position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(90,171,184,.06) 0%,transparent 70%);
+  pointer-events:none
+}
+
+/* FORM SUCCESS ANIMATION */
+.form-success{
+  display:none;text-align:center;padding:3rem 2rem
+}
+.form-success.show{display:block}
+.form-success-icon{
+  width:60px;height:60px;margin:0 auto 1.5rem;
+  border-radius:50%;background:rgba(90,171,184,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);font-size:1.5rem;
+  animation:successPop .5s cubic-bezier(.33,1,.68,1)
+}
+@keyframes successPop{
+  0%{transform:scale(0);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* SPARKLE EFFECT ON SIGNATURE PRICE */
+.sparkle{
+  position:absolute;width:6px;height:6px;
+  background:var(--accent);border-radius:50%;
+  pointer-events:none;opacity:0;
+  animation:sparkleFade 1.2s ease-out forwards
+}
+@keyframes sparkleFade{
+  0%{transform:scale(0) translateY(0);opacity:1}
+  50%{opacity:.8}
+  100%{transform:scale(1) translateY(-30px);opacity:0}
+}
+
+/* SMOOTH PAGE TRANSITIONS */
+.page-transition{
+  animation:pageIn .6s cubic-bezier(.25,.46,.45,.94)
+}
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* TOUCH-SAFE HOVER STATES */
+@media(hover:none){
+  .magnetic-btn{transform:none!important}
+  .magnetic-btn:active{transform:scale(.96)!important}
+  .nav-links a:active{color:var(--accent)}
+  .carte-tab:active{transform:scale(.95)}
+}
+
+/* PERFORMANCE - REDUCE MOTION */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important
+  }
+  .particle{display:none}
+}
+
+/* LOADING SKELETON */
+.skeleton{
+  background:linear-gradient(90deg,rgba(255,255,255,.03) 25%,rgba(255,255,255,.06) 50%,rgba(255,255,255,.03) 75%);
+  background-size:200% 100%;
+  animation:skeletonShimmer 1.5s infinite
+}
+@keyframes skeletonShimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
 }
 </style>
 </head>
 <body>
+<!-- FLOATING WHATSAPP (mobile) -->
+<a href="https://wa.me/221775043006" class="whatsapp-float" aria-label="Réserver sur WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- STICKY MOBILE CTA -->
+<div class="mobile-sticky-cta" id="mobileStickyCta">
+  <a href="#reservation" class="magnetic-btn"><span class="btn btn-primary" style="padding:.7rem 1.5rem;font-size:.7rem">Réserver</span></a>
+  <a href="https://wa.me/221775043006" class="magnetic-btn" target="_blank" rel="noopener"><span class="btn btn-outline" style="padding:.7rem 1.5rem;font-size:.7rem;border-color:rgba(37,211,102,.5);color:#25D366">WhatsApp</span></a>
+</div>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <!-- PAGE LOADER -->
 <div class="page-loader" id="pageLoader">
   <div class="loader-scene">
@@ -1291,6 +1483,157 @@ document.getElementById('langToggle').onclick=function(){
   const resCardTitle=document.querySelector('#reservation .glass-strong h3');
   if(resCardTitle)resCardTitle.textContent=currentLang==='fr'?'réservation en ligne':'online reservation';
 };
+
+/* ====== NEW ENHANCEMENTS JS ====== */
+
+/* GALLERY LIGHTBOX */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+const lightboxCaption=document.getElementById('lightboxCaption');
+const lightboxClose=document.getElementById('lightboxClose');
+
+document.querySelectorAll('.galerie-item').forEach(item=>{
+  item.style.cursor='pointer';
+  item.addEventListener('click',()=>{
+    const img=item.querySelector('img');
+    const label=item.querySelector('.galerie-label');
+    if(img){
+      lightboxImg.src=img.src;
+      lightboxImg.alt=img.alt;
+      lightboxCaption.textContent=label?label.textContent:img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+  });
+});
+lightboxClose.addEventListener('click',()=>{
+  lightbox.classList.remove('open');
+  document.body.style.overflow='';
+});
+lightbox.addEventListener('click',(e)=>{
+  if(e.target===lightbox){
+    lightbox.classList.remove('open');
+    document.body.style.overflow='';
+  }
+});
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape'&&lightbox.classList.contains('open')){
+    lightbox.classList.remove('open');
+    document.body.style.overflow='';
+  }
+});
+
+/* STICKY MOBILE CTA */
+const stickyCta=document.getElementById('mobileStickyCta');
+let lastScrollY=0;
+if(stickyCta){
+  window.addEventListener('scroll',()=>{
+    if(window.innerWidth>768)return;
+    const heroBottom=document.querySelector('.hero').offsetHeight;
+    if(window.scrollY>heroBottom&&window.scrollY>lastScrollY){
+      stickyCta.classList.add('visible');
+    }else if(window.scrollY<heroBottom){
+      stickyCta.classList.remove('visible');
+    }
+    lastScrollY=window.scrollY;
+  },{passive:true});
+}
+
+/* TOUCH RIPPLE on interactive elements */
+if('ontouchstart' in window||navigator.maxTouchPoints>0){
+  document.querySelectorAll('.carte-item,.btn,.carte-tab').forEach(el=>{
+    el.classList.add('touch-ripple');
+    el.addEventListener('touchstart',(e)=>{
+      const rect=el.getBoundingClientRect();
+      const x=((e.touches[0].clientX-rect.left)/rect.width*100);
+      const y=((e.touches[0].clientY-rect.top)/rect.height*100);
+      el.style.setProperty('--ripple-x',x+'%');
+      el.style.setProperty('--ripple-y',y+'%');
+    },{passive:true});
+  });
+}
+
+/* FORM SUCCESS ANIMATION */
+const reservationForm=document.querySelector('#reservation form');
+if(reservationForm){
+  const originalSubmit=reservationForm.onsubmit;
+  reservationForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}})
+    .then(r=>{
+      const btn=this.querySelector('button[type="submit"]');
+      if(r.ok){
+        btn.innerHTML='<span class="form-success-icon" style="display:inline-flex">✓</span> '+(currentLang==='fr'?'Merci ! Nous vous contacterons.':'Thank you! We will contact you.');
+        btn.disabled=true;
+        btn.style.background='rgba(90,171,184,.2)';
+        btn.style.borderColor='var(--accent)';
+        btn.style.color='var(--accent)';
+        gsap.fromTo(btn,{scale:.9},{scale:1,duration:.4,ease:'back.out(2)'});
+      }else{
+        btn.textContent=currentLang==='fr'?'Erreur, réessayez':'Error, please try again';
+      }
+    });
+  });
+}
+
+/* SPARKLE on signature price on hover */
+const sigPrice=document.querySelector('.signature-price');
+if(sigPrice){
+  sigPrice.style.position='relative';
+  sigPrice.addEventListener('mouseenter',()=>{
+    for(let i=0;i<5;i++){
+      const s=document.createElement('div');
+      s.className='sparkle';
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=Math.random()*.3+'s';
+      sigPrice.appendChild(s);
+      setTimeout(()=>s.remove(),1500);
+    }
+  });
+}
+
+/* NAV PROGRESSIVE TRANSPARENCY */
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const scrollPct=Math.min(scrollY/200,1);
+  const bg=scrollPct<.3?'transparent':`rgba(8,14,26,${scrollPct*.7})`;
+  if(scrollPct<.3){
+    navEl.style.background='transparent';
+    navEl.style.backdropFilter='none';
+    navEl.style.WebkitBackdropFilter='none';
+    navEl.style.borderBottom='1px solid transparent';
+  }
+},{passive:true});
+
+/* LAZY LOAD images with IntersectionObserver */
+if('IntersectionObserver' in window){
+  const imgObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const img=entry.target;
+        if(img.dataset.src){
+          img.src=img.dataset.src;
+          img.removeAttribute('data-src');
+        }
+        imgObserver.unobserve(img);
+      }
+    });
+  },{rootMargin:'200px'});
+  document.querySelectorAll('img[loading="lazy"]').forEach(img=>imgObserver.observe(img));
+}
+
+/* MOBILE: hide WhatsApp float when sticky CTA visible */
+if(window.innerWidth<=768){
+  const waFloat=document.querySelector('.whatsapp-float');
+  if(waFloat&&stickyCta){
+    const mo=new MutationObserver(()=>{
+      waFloat.style.bottom=stickyCta.classList.contains('visible')?'5rem':'1.5rem';
+    });
+    mo.observe(stickyCta,{attributes:true,attributeFilter:['class']});
+  }
+}
+
 </script>
 </body>
 </html>
