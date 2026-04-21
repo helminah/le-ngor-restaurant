@@ -126,7 +126,8 @@ body::after{
   border-bottom:1px solid rgba(90,171,184,.1);
   box-shadow:0 4px 30px rgba(0,0,0,.2)
 }
-.nav-logo{display:flex;flex-direction:column}
+.nav-logo{display:flex;align-items:center}
+.nav-logo-img{height:50px;width:auto;filter:brightness(1.1)}
 .nav-logo-main{font-family:var(--serif);font-size:1.5rem;font-weight:300;font-style:italic;color:var(--white)}
 .nav-logo-sub{font-family:var(--sans);font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);opacity:.9;margin-top:-.15rem}
 .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
@@ -757,7 +758,7 @@ body::after{
 <div class="cursor-glow" id="cursorGlow"></div>
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo"><span class="nav-logo-main">Le Ngor</span><span class="nav-logo-sub">pieds dans l'eau</span></a>
+  <a href="#" class="nav-logo"><img src="img/logo.png" alt="Le Ngor — Pieds dans l'eau" class="nav-logo-img"></a>
   <ul class="nav-links">
     <li><a href="#histoire">Notre histoire</a></li>
     <li><a href="#carte">La carte</a></li>
