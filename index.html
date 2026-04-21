@@ -24,12 +24,21 @@
 <meta name="twitter:description" content="Restaurant Le Ngor — Fruits de mer, grillades & cuisine sénégalaise face à l'océan Atlantique. Corniche des Almadies, Dakar, Sénégal. #6 TripAdvisor.">
 <meta name="twitter:image" content="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/29/b8/a5/table-bord-de-mer.jpg?w=1200">
 <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Le Ngor",
+  "alternateName": "Le Ngor Pieds dans l'Eau",
+  "url": "https://restaurantlengor.sn/"
+}
+</script>
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"Le Ngor","alternateName":"Le Ngor Pieds dans l'Eau","description":"Le Ngor est un restaurant de fruits de mer et grillades situé sur la Corniche des Almadies à Dakar, Sénégal. Spécialités: langouste, thiof, gambas, côte de bœuf. Tables pieds dans l'eau face à l'océan Atlantique.","url":"https://restaurantlengor.sn","telephone":"+221-77-504-30-06","email":"contact@restaurantlengor.sn","image":"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/29/b8/a5/table-bord-de-mer.jpg?w=1200","address":{"@type":"PostalAddress","streetAddress":"Corniche des Almadies","addressLocality":"Dakar","postalCode":"12000","addressCountry":"SN"},"geo":{"@type":"GeoCoordinates","latitude":14.7392,"longitude":-17.5125},"servesCuisine":["Seafood","Grills","Senegalese","Mediterranean","African"],"priceRange":"$$-$$$","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"01:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.5","reviewCount":"462"},"sameAs":["https://www.instagram.com/restaurantlengor/","https://www.facebook.com/restaurantlengor","https://www.tripadvisor.fr/Restaurant_Review-g293831-d1717318-Reviews-Le_Ngor-Dakar_Dakar_Region.html"],"hasMap":"https://maps.google.com/?q=Le+Ngor+Restaurant+Dakar","acceptsReservations":"True","menu":"https://restaurantlengor.sn/NOTRE-CARTE.pdf","starRating":{"@type":"Rating","ratingValue":"4.5"}}
 </script>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="shortcut icon" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/logo.png">
+<link rel="shortcut icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -125,8 +134,7 @@ body::after{
   border-bottom:1px solid rgba(90,171,184,.1);
   box-shadow:0 4px 30px rgba(0,0,0,.2)
 }
-.nav-logo{display:flex;align-items:center}
-.nav-logo-img{height:50px;width:auto;filter:brightness(1.1)}
+.nav-logo{display:flex;flex-direction:column}
 .nav-logo-main{font-family:var(--serif);font-size:1.5rem;font-weight:300;font-style:italic;color:var(--white)}
 .nav-logo-sub{font-family:var(--sans);font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);opacity:.9;margin-top:-.15rem}
 .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
@@ -757,7 +765,7 @@ body::after{
 <div class="cursor-glow" id="cursorGlow"></div>
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo"><img src="img/logo.png" alt="Le Ngor — Pieds dans l'eau" class="nav-logo-img"></a>
+  <a href="#" class="nav-logo"><span class="nav-logo-main">Le Ngor</span><span class="nav-logo-sub">pieds dans l'eau</span></a>
   <ul class="nav-links">
     <li><a href="#histoire">Notre histoire</a></li>
     <li><a href="#carte">La carte</a></li>
