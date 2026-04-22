@@ -1158,7 +1158,7 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
-          <form action="https://formspree.io/f/xjgjerwd" method="POST" onsubmit="event.preventDefault();const fd=new FormData(this);const email=fd.get('email');if(email)fd.append('_replyto',email);const dval=fd.get('date');if(dval){const d=new Date(dval);fd.set('date',d.toLocaleString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}));}fetch(this.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(r=&gt;{if(r.ok){this.querySelector('button').textContent=currentLang==='fr'?'Merci ! Nous vous contacterons.':'Thank you! We will contact you.';this.querySelector('button').disabled=true}else{this.querySelector('button').textContent=currentLang==='fr'?'Erreur, reessayez':'Error, please try again'}})">
+          <form action="https://formspree.io/f/xjgjerwd" method="POST" id="reservation-form">
             <input type="hidden" name="_subject" value="Nouvelle reservation - Le Ngor">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_autoresponse" value="Merci pour votre demande de reservation au restaurant Le Ngor ! Notre equipe vous contactera sous 24h pour confirmer votre table. A tres bientot, L'equipe Le Ngor">
@@ -1857,6 +1857,37 @@ if(window.innerWidth<=768){
     mo.observe(stickyCta,{attributes:true,attributeFilter:['class']});
   }
 }
+
+/* FORMULAIRE RESERVATION FORMSPREE */
+(function(){
+  const form = document.getElementById('reservation-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const fd = new FormData(form);
+    const email = fd.get('email');
+    if(email && email.includes('@')) fd.append('_replyto', email);
+    const dval = fd.get('date');
+    if(dval){
+      const d = new Date(dval);
+      fd.delete('date');
+      fd.append('date', d.toLocaleString('fr-FR', {
+        weekday:'long', day:'numeric', month:'long', year:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      }));
+    }
+    fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}})
+    .then(r => {
+      const btn = form.querySelector('button[type="submit"]');
+      if(r.ok){
+        btn.textContent = currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.';
+        btn.disabled = true;
+      } else {
+        btn.textContent = currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again';
+      }
+    });
+  });
+})();
 
 </script>
 </body>
