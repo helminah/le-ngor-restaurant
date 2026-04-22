@@ -1810,7 +1810,10 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
 
     emailjs.send('service_hurty9i', 'template_hhp50od', params)
       .then(() => {
-        btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (window.currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
+        const msg = window.currentLang==='fr'
+          ? 'Reservation envoyee ! Un email de confirmation vous a ete envoye.'
+          : 'Reservation sent! A confirmation email has been sent to you.';
+        btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + msg;
         btn.style.background = 'rgba(90,171,184,.2)';
         btn.style.borderColor = 'var(--accent)';
         btn.style.color = 'var(--accent)';
