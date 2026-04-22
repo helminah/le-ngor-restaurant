@@ -1775,30 +1775,66 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
   });
 }
 
-/* FORM SUCCESS ANIMATION */
-const reservationForm=document.querySelector('#reservation form');
-if(reservationForm){
-  const originalSubmit=reservationForm.onsubmit;
-  reservationForm.addEventListener('submit',function(e){
-    e.preventDefault();
-    fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}})
-    .then(r=>{
-      const btn=this.querySelector('button[type="submit"]');
-      if(r.ok){
-        btn.innerHTML='<span class="form-success-icon" style="display:inline-flex">✓</span> '+(currentLang==='fr'?'Merci ! Nous vous contacterons.':'Thank you! We will contact you.');
-        btn.disabled=true;
-        btn.style.background='rgba(90,171,184,.2)';
-        btn.style.borderColor='var(--accent)';
-        btn.style.color='var(--accent)';
-        gsap.fromTo(btn,{scale:.9},{scale:1,duration:.4,ease:'back.out(2)'});
-      }else{
-        btn.textContent=currentLang==='fr'?'Erreur, réessayez':'Error, please try again';
-      }
-    });
-  });
-}
+/* FORMULAIRE RESERVATION EMAILJS */
+(function(){
+  const EMAILJS_PUBLIC_KEY = 'BSgrAeYe5yEJNtDuq';
+  const EMAILJS_TEMPLATE_ID = 'template_t4ruhu5';
+  const EMAILJS_SERVICE_ID = 'service_hurty9i';
 
-/* SPARKLE on signature price on hover */
+  if(typeof emailjs === 'undefined'){ console.error('[Le Ngor] EmailJS non charge'); return; }
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  const form = document.getElementById('reservation-form');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const fd = new FormData(form);
+
+    // Parse datetime-local sans decalage timezone
+    let dateStr = '';
+    const dval = fd.get('date');
+    if(dval){
+      const [yyyy,mm,dd,hh,mi] = dval.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/).slice(1);
+      const d = new Date(yyyy, mm-1, dd, hh, mi);
+      dateStr = d.toLocaleString('fr-FR', {
+        weekday:'long', day:'numeric', month:'long', year:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      });
+    }
+
+    const params = {
+      nom: fd.get('nom') || '',
+      tel: fd.get('tel') || '',
+      email: fd.get('email') || 'Non renseigne',
+      date: dateStr,
+      convives: fd.get('convives') || '',
+      occasion: fd.get('occasion') || 'Non precisee',
+      message: fd.get('message') || 'Aucune demande speciale'
+    };
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
+    btn.disabled = true;
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(() => {
+        btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">✓</span> ' + (currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
+        btn.style.background = 'rgba(90,171,184,.2)';
+        btn.style.borderColor = 'var(--accent)';
+        btn.style.color = 'var(--accent)';
+        if(typeof gsap !== 'undefined'){
+          gsap.fromTo(btn, {scale:.9}, {scale:1, duration:.4, ease:'back.out(2)'});
+        }
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again') + '</span>';
+        btn.disabled = false;
+      });
+  });
+})();
 const sigPrice=document.querySelector('.signature-price');
 if(sigPrice){
   sigPrice.style.position='relative';
@@ -1855,57 +1891,6 @@ if(window.innerWidth<=768){
     mo.observe(stickyCta,{attributes:true,attributeFilter:['class']});
   }
 }
-
-/* FORMULAIRE RESERVATION EMAILJS */
-(function(){
-  // REMPLACEZ CES 2 VALEURS APRES CREATION DU TEMPLATE DANS EMAILJS
-  const EMAILJS_PUBLIC_KEY = 'BSgrAeYe5yEJNtDuq';
-  const EMAILJS_TEMPLATE_ID = 'template_t4ruhu5';
-  const EMAILJS_SERVICE_ID = 'service_hurty9i';
-
-  if(EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY'){
-    console.warn('[Le Ngor] EmailJS: remplacez YOUR_PUBLIC_KEY et YOUR_TEMPLATE_ID dans le code');
-  }
-  emailjs.init(EMAILJS_PUBLIC_KEY);
-
-  const form = document.getElementById('reservation-form');
-  if(!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const fd = new FormData(form);
-    const dval = fd.get('date');
-    let dateStr = '';
-    if(dval){
-      const d = new Date(dval);
-      dateStr = d.toLocaleString('fr-FR', {
-        weekday:'long', day:'numeric', month:'long', year:'numeric',
-        hour:'2-digit', minute:'2-digit'
-      });
-    }
-    const params = {
-      nom: fd.get('nom') || '',
-      tel: fd.get('tel') || '',
-      email: fd.get('email') || 'Non renseigne',
-      date: dateStr,
-      convives: fd.get('convives') || '',
-      occasion: fd.get('occasion') || 'Non precisee',
-      message: fd.get('message') || 'Aucune demande speciale'
-    };
-    const btn = form.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
-    btn.disabled = true;
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-    .then(() => {
-      btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.') + '</span>';
-    })
-    .catch((err) => {
-      console.error('EmailJS error:', err);
-      btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again') + '</span>';
-      btn.disabled = false;
-    });
-  });
-})();
 
 </script>
 </body>
