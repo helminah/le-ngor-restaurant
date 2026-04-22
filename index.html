@@ -1158,10 +1158,11 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
-          <form id="reservation-form" action="https://formspree.io/f/xjgjerwd" method="POST">
+          <form id="reservation-form" action="https://formsubmit.co/contact@restaurantlengor.sn" method="POST">
             <input type="hidden" name="_subject" value="Nouvelle reservation - Le Ngor">
-            <input type="hidden" name="_replyto" value="">
             <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://restaurantlengor.sn/#reservation?merci=1">
             <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
               <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
@@ -1777,22 +1778,28 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
   });
 }
 
-/* FORMULAIRE RESERVATION FORMSPREE */
+/* FORMULAIRE RESERVATION FORMSUBMIT */
 (function(){
   const form = document.getElementById('reservation-form');
   if(!form) return;
 
+  // Si retour de formsubmit.co avec ?merci=1, afficher le succes
+  if(location.search.includes('merci=1')){
+    const btn = form.querySelector('button[type="submit"]');
+    if(btn){
+      btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (window.currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
+      btn.style.background = 'rgba(90,171,184,.2)';
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.color = 'var(--accent)';
+    }
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
 
-    // Sync _replyto avec l'email saisi
-    const emailInput = form.querySelector('input[name="email"]');
-    const replytoInput = form.querySelector('input[name="_replyto"]');
-    if(emailInput && replytoInput) replytoInput.value = emailInput.value;
-
-    btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
+    btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (window.currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
     btn.disabled = true;
 
     fetch(form.action, {
@@ -1801,8 +1808,9 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
       body: new FormData(form)
     })
     .then(async r => {
-      if(r.ok){
-        btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
+      const text = await r.text();
+      if(r.ok || r.status === 302 || text.includes('success')){
+        btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (window.currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
         btn.style.background = 'rgba(90,171,184,.2)';
         btn.style.borderColor = 'var(--accent)';
         btn.style.color = 'var(--accent)';
@@ -1811,14 +1819,13 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
         }
         form.reset();
       } else {
-        const data = await r.json().catch(()=>null);
-        throw new Error(data?.error || 'Formspree error');
+        throw new Error('Formsubmit status ' + r.status);
       }
     })
     .catch((err) => {
-      console.error('Formspree error:', err);
-      btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again') + '</span>';
-      btn.disabled = false;
+      console.error('Formsubmit error:', err);
+      // Fallback: soumission native si fetch echoue
+      form.submit();
     });
   });
 })();
