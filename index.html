@@ -1158,10 +1158,11 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
-          <form action="https://formspree.io/f/xjgjerwd" method="POST" id="reservation-form">
+          <form action="https://formsubmit.co/ajax/contact@restaurantlengor.sn" method="POST" id="reservation-form">
             <input type="hidden" name="_subject" value="Nouvelle reservation - Le Ngor">
-            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_replyto">
             <input type="hidden" name="_autoresponse" value="Merci pour votre demande de reservation au restaurant Le Ngor ! Notre equipe vous contactera sous 24h pour confirmer votre table. A tres bientot, L'equipe Le Ngor">
+            <input type="hidden" name="_template" value="table">
             <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
               <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
