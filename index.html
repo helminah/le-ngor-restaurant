@@ -714,6 +714,7 @@ body::after{
   100%{background-position:-200% 0}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 <!-- FLOATING WHATSAPP (mobile) -->
@@ -1158,11 +1159,7 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
-          <form id="reservation-form" action="https://formsubmit.co/contact@restaurantlengor.sn" method="POST">
-            <input type="hidden" name="_subject" value="Nouvelle reservation - Le Ngor">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://restaurantlengor.sn/#reservation?merci=1">
+          <form id="reservation-form">
             <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
               <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
@@ -1778,38 +1775,41 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
   });
 }
 
-/* FORMULAIRE RESERVATION FORMSUBMIT */
+/* FORMULAIRE RESERVATION */
 (function(){
+  emailjs.init('BSgrAeYe5yEJNtDuq');
   const form = document.getElementById('reservation-form');
   if(!form) return;
-
-  // Si retour de formsubmit.co avec ?merci=1, afficher le succes
-  if(location.search.includes('merci=1')){
-    const btn = form.querySelector('button[type="submit"]');
-    if(btn){
-      btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (window.currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
-      btn.style.background = 'rgba(90,171,184,.2)';
-      btn.style.borderColor = 'var(--accent)';
-      btn.style.color = 'var(--accent)';
-    }
-    history.replaceState(null, '', location.pathname + location.hash);
-  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
+    const originalBtn = btn.innerHTML;
 
     btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (window.currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
     btn.disabled = true;
 
-    fetch(form.action, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    })
-    .then(async r => {
-      const text = await r.text();
-      if(r.ok || r.status === 302 || text.includes('success')){
+    const fd = new FormData(form);
+    let dateStr = '';
+    const dval = fd.get('date');
+    if(dval){
+      const [yyyy,mm,dd,hh,mi] = dval.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/).slice(1);
+      const d = new Date(yyyy, mm-1, dd, hh, mi);
+      dateStr = d.toLocaleString('fr-FR', {weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    }
+
+    const params = {
+      nom: fd.get('nom') || '',
+      tel: fd.get('tel') || '',
+      email: fd.get('email') || 'Non renseigne',
+      date: dateStr,
+      convives: fd.get('convives') || '',
+      occasion: fd.get('occasion') || 'Non precisee',
+      message: fd.get('message') || 'Aucune demande speciale'
+    };
+
+    emailjs.send('service_hurty9i', 'template_hhp50od', params)
+      .then(() => {
         btn.innerHTML = '<span class="form-success-icon" style="display:inline-flex;margin-right:6px">&#10003;</span> ' + (window.currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.');
         btn.style.background = 'rgba(90,171,184,.2)';
         btn.style.borderColor = 'var(--accent)';
@@ -1818,15 +1818,13 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
           gsap.fromTo(btn, {scale:.9}, {scale:1, duration:.4, ease:'back.out(2)'});
         }
         form.reset();
-      } else {
-        throw new Error('Formsubmit status ' + r.status);
-      }
-    })
-    .catch((err) => {
-      console.error('Formsubmit error:', err);
-      // Fallback: soumission native si fetch echoue
-      form.submit();
-    });
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        btn.innerHTML = originalBtn;
+        btn.disabled = false;
+        alert(window.currentLang==='fr' ? 'Erreur d\'envoi. Veuillez reessayer ou nous contacter par WhatsApp.' : 'Sending error. Please try again or contact us via WhatsApp.');
+      });
   });
 })();
 const sigPrice=document.querySelector('.signature-price');
