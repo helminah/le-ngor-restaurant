@@ -1158,11 +1158,7 @@ body::after{
             <div class="section-label" data-reveal style="color:var(--accent)">R&eacute;server</div>
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
-          <form action="https://formsubmit.co/ajax/contact@restaurantlengor.sn" method="POST" id="reservation-form">
-            <input type="hidden" name="_subject" value="Nouvelle reservation - Le Ngor">
-            <input type="hidden" name="_replyto">
-            <input type="hidden" name="_autoresponse" value="Merci pour votre demande de reservation au restaurant Le Ngor ! Notre equipe vous contactera sous 24h pour confirmer votre table. A tres bientot, L'equipe Le Ngor">
-            <input type="hidden" name="_template" value="table">
+          <form id="reservation-form">
             <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
               <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
@@ -1204,6 +1200,7 @@ body::after{
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1859,33 +1856,53 @@ if(window.innerWidth<=768){
   }
 }
 
-/* FORMULAIRE RESERVATION FORMSPREE */
+/* FORMULAIRE RESERVATION EMAILJS */
 (function(){
+  // REMPLACEZ CES 2 VALEURS APRES CREATION DU TEMPLATE DANS EMAILJS
+  const EMAILJS_PUBLIC_KEY = 'BSgrAeYe5yEJNtDuq';
+  const EMAILJS_TEMPLATE_ID = 'template_eyqzod9';
+  const EMAILJS_SERVICE_ID = 'service_hurty9i';
+
+  if(EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY'){
+    console.warn('[Le Ngor] EmailJS: remplacez YOUR_PUBLIC_KEY et YOUR_TEMPLATE_ID dans le code');
+  }
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
   const form = document.getElementById('reservation-form');
   if(!form) return;
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const fd = new FormData(form);
-    const email = fd.get('email');
-    if(email && email.includes('@')) fd.append('_replyto', email);
     const dval = fd.get('date');
+    let dateStr = '';
     if(dval){
       const d = new Date(dval);
-      fd.delete('date');
-      fd.append('date', d.toLocaleString('fr-FR', {
+      dateStr = d.toLocaleString('fr-FR', {
         weekday:'long', day:'numeric', month:'long', year:'numeric',
         hour:'2-digit', minute:'2-digit'
-      }));
+      });
     }
-    fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}})
-    .then(r => {
-      const btn = form.querySelector('button[type="submit"]');
-      if(r.ok){
-        btn.textContent = currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.';
-        btn.disabled = true;
-      } else {
-        btn.textContent = currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again';
-      }
+    const params = {
+      nom: fd.get('nom') || '',
+      tel: fd.get('tel') || '',
+      email: fd.get('email') || 'Non renseigne',
+      date: dateStr,
+      convives: fd.get('convives') || '',
+      occasion: fd.get('occasion') || 'Non precisee',
+      message: fd.get('message') || 'Aucune demande speciale'
+    };
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Envoi en cours...' : 'Sending...') + '</span>';
+    btn.disabled = true;
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+    .then(() => {
+      btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Merci ! Nous vous contacterons.' : 'Thank you! We will contact you.') + '</span>';
+    })
+    .catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.innerHTML = '<span class="btn btn-primary" style="width:100%;justify-content:center">' + (currentLang==='fr' ? 'Erreur, reessayez' : 'Error, please try again') + '</span>';
+      btn.disabled = false;
     });
   });
 })();
