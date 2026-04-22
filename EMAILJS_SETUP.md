@@ -135,7 +135,7 @@ Toujours dans l'onglet **Content**, colonne de droite :
 
 Le fichier `index.html` a deja ete modifie avec :
 - **Service ID** : `service_hurty9i`
-- **Template ID** : `template_eyqzod9`
+**Template ID :** `template_tdf1glj`
 - **Public Key** : `BSgrAeYe5yEJNtDuq`
 
 Il ne reste plus qu'a configurer le template dans EmailJS et tester !
