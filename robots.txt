@@ -1,14 +1,17 @@
 User-agent: *
 Allow: /
 
+# Bloquer les fichiers de développement et sensibles
+Disallow: /emailjs-autoconfig.js
+Disallow: /emailjs-autoreply-console.js
+Disallow: /emailjs-test.html
+Disallow: /EMAILJS_SETUP.md
+Disallow: /GUIDE-GOOGLE.md
+
 Sitemap: https://restaurantlengor.sn/sitemap.xml
 
-# Allow all crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
-
-User-agent: *
-Disallow:
