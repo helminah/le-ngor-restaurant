@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Carte — Le NGOR Restaurant Dakar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#080E1A;--accent:#5AABB8;--accent2:#7EC8D4;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+body{font-family:var(--sans);font-weight:300;color:#1A1D23;background:#F8F5F0;line-height:1.6}
+.page{max-width:820px;margin:0 auto;padding:3rem 2rem 4rem}
+
+/* PRINT BUTTON */
+.print-bar{background:var(--dark);color:#fff;padding:1rem 2rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:1rem;font-family:var(--sans);font-size:.82rem;letter-spacing:.05em}
+.print-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:3px;font-size:.8rem;font-family:var(--sans);font-weight:500;letter-spacing:.06em;cursor:pointer;text-transform:uppercase}
+.print-btn:hover{background:var(--accent2)}
+
+/* HEADER */
+.carte-header{text-align:center;padding:2.5rem 0 2rem;border-bottom:1px solid rgba(0,0,0,.1);margin-bottom:2.5rem}
+.carte-logo{font-family:var(--serif);font-size:3rem;font-weight:300;letter-spacing:.08em;color:var(--dark)}
+.carte-sub{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin:.4rem 0 .8rem;font-weight:500}
+.carte-addr{font-size:.78rem;color:rgba(26,29,35,.55);letter-spacing:.04em}
+
+/* SECTIONS */
+.section{margin-bottom:2.5rem}
+.section-title{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--dark);border-bottom:1px solid rgba(90,171,184,.4);padding-bottom:.5rem;margin-bottom:1.4rem;letter-spacing:.04em}
+.section-title em{font-style:italic;color:var(--accent)}
+
+/* ITEMS */
+.items-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 2rem}
+.item{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:.55rem 0;border-bottom:1px dotted rgba(0,0,0,.12)}
+.item:last-child{border-bottom:none}
+.item-left{flex:1}
+.item-name{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--dark);margin-bottom:.1rem}
+.item-desc{font-size:.72rem;color:rgba(26,29,35,.55);line-height:1.5}
+.item-price{font-family:var(--serif);font-size:.95rem;font-weight:500;color:var(--accent);white-space:nowrap}
+.item.featured .item-name::after{content:' ★';font-size:.65rem;color:var(--accent);vertical-align:top}
+
+/* FOOTER */
+.carte-footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.1);font-size:.72rem;color:rgba(26,29,35,.5);letter-spacing:.04em;line-height:2}
+
+@media(max-width:600px){.items-grid{grid-template-columns:1fr}}
+
+@media print{
+  .print-bar{display:none}
+  body{background:#fff}
+  .page{padding:1.5rem 1rem}
+  .section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <span>Le NGOR — Carte complète 2026</span>
+  <button class="print-btn" onclick="window.print()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Imprimer / Enregistrer en PDF
+  </button>
+</div>
+
+<div class="page">
+  <div class="carte-header">
+    <div class="carte-logo">Le NGOR</div>
+    <div class="carte-sub">Pieds dans l'eau &mdash; Corniche des Almadies, Dakar</div>
+    <div class="carte-addr">+221 77 504 30 06 &nbsp;&bull;&nbsp; restaurantlengor@hotmail.com &nbsp;&bull;&nbsp; Ouvert 10h&ndash;01h &bull; Ferm&eacute; le mardi</div>
+  </div>
+
+  <!-- ENTRÉES -->
+  <div class="section">
+    <div class="section-title">Entr&eacute;es</div>
+    <div class="items-grid">
+      <div class="item">
+        <div class="item-left"><div class="item-name">Salade Oc&eacute;ane</div><div class="item-desc">Crevettes, poulpe et saumon marin&eacute;, vinaigrette agrumes</div></div>
+        <div class="item-price">6 000 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Accras de Morue</div><div class="item-desc">Beignets croustillants aux &eacute;pices, sauce chien maison</div></div>
+        <div class="item-price">4 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Tourte Aubergine &amp; Ch&egrave;vre</div><div class="item-desc">Feuillet&eacute;e aux aubergines grill&eacute;es, fromage de ch&egrave;vre frais</div></div>
+        <div class="item-price">5 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Hu&icirc;tres de Casamance</div><div class="item-desc">6 pi&egrave;ces, citron vert et &eacute;chalotes au vinaigre</div></div>
+        <div class="item-price">7 000 FCFA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUITS DE LA MER -->
+  <div class="section">
+    <div class="section-title">Produits de la <em>Mer</em></div>
+    <div class="items-grid">
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Gambas Laqu&eacute;es Mangue-Passion</div><div class="item-desc">Gambas g&eacute;antes laqu&eacute;es, sauce exotique mangue et fruit de la passion</div></div>
+        <div class="item-price">12 500 FCFA</div>
+      </div>
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Homard Grill&eacute;</div><div class="item-desc">Homard entier grill&eacute; au beurre d'ail et herbes fra&icirc;ches</div></div>
+        <div class="item-price">14 500 FCFA</div>
+      </div>
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Camerons Sauce Rouille</div><div class="item-desc">Crevettes royales, sauce rouille de crustac&eacute;s maison</div></div>
+        <div class="item-price">13 000 FCFA</div>
+      </div>
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Plateau Royal de Fruits de Mer</div><div class="item-desc">Pour 2 &mdash; homard, gambas, hu&icirc;tres, langoustines, bulots</div></div>
+        <div class="item-price">35 000 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Langouste Grill&eacute;e</div><div class="item-desc">Langouste fra&icirc;che, beurre citronn&eacute; et riz parfum&eacute;</div></div>
+        <div class="item-price">16 000 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Filet de Thiof</div><div class="item-desc">Poisson noble du S&eacute;n&eacute;gal, sauce cr&eacute;ole et l&eacute;gumes du march&eacute;</div></div>
+        <div class="item-price">9 500 FCFA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRILLADES & PLATS -->
+  <div class="section">
+    <div class="section-title">Grillades &amp; <em>Plats</em></div>
+    <div class="items-grid">
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Souris d'Agneau au Miel</div><div class="item-desc">Confite au miel et &eacute;pices douces, pur&eacute;e maison</div></div>
+        <div class="item-price">11 000 FCFA</div>
+      </div>
+      <div class="item featured">
+        <div class="item-left"><div class="item-name">Thieboudienne Traditionnel</div><div class="item-desc">Le plat national revisit&eacute;, poisson frais du jour</div></div>
+        <div class="item-price">8 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Brochettes Mixtes</div><div class="item-desc">B&oelig;uf, poulet et gambas, l&eacute;gumes grill&eacute;s, chimichurri</div></div>
+        <div class="item-price">10 000 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Poulet Yassa</div><div class="item-desc">Marin&eacute; aux oignons et citron, recette casamancaise</div></div>
+        <div class="item-price">7 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Entrec&ocirc;te Grill&eacute;e</div><div class="item-desc">Grill&eacute;e au feu de bois, frites maison et salade</div></div>
+        <div class="item-price">12 000 FCFA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="section">
+    <div class="section-title"><em>Desserts</em></div>
+    <div class="items-grid">
+      <div class="item">
+        <div class="item-left"><div class="item-name">Tiramisu Maison</div><div class="item-desc">Mascarpone onctueuse et caf&eacute; italien</div></div>
+        <div class="item-price">4 000 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Fondant au Chocolat</div><div class="item-desc">C&oelig;ur coulant au chocolat noir, glace vanille</div></div>
+        <div class="item-price">4 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Salade de Fruits Frais</div><div class="item-desc">Fruits tropicaux de saison, sirop de menthe</div></div>
+        <div class="item-price">3 500 FCFA</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">Cr&egrave;me Br&ucirc;l&eacute;e Coco</div><div class="item-desc">Infus&eacute;e au lait de coco, caramel croquant</div></div>
+        <div class="item-price">4 000 FCFA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carte-footer">
+    <div>Tous nos plats sont pr&eacute;par&eacute;s avec des produits frais du march&eacute; local et de la p&ecirc;che du jour.</div>
+    <div>Les prix sont en Francs CFA et incluent toutes taxes. &bull; Service non compris.</div>
+    <div style="margin-top:.6rem;font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;letter-spacing:.06em">&copy; 2026 Le NGOR Restaurant &mdash; Corniche des Almadies, Dakar</div>
+  </div>
+</div>
+
+</body>
+</html>
