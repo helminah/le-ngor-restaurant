@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Sécurité : empêche le chargement dans une iframe (clickjacking) -->
+<meta http-equiv="X-Frame-Options" content="DENY">
+<!-- Sécurité : empêche le MIME-sniffing -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<!-- Sécurité : contrôle les infos envoyées aux sites tiers -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- CSP : autorise uniquement les sources nécessaires au site -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
 <title>Le Ngor — Pieds dans l'eau | Restaurant Dakar</title>
 <meta name="description" content="Le Ngor — Restaurant pieds dans l'eau à Dakar, Sénégal. Fruits de mer frais, grillades & spécialités sénégalaises sur la Corniche des Almadies. Réservation WhatsApp. Classé #6 sur TripAdvisor.">
 <link rel="canonical" href="https://restaurantlengor.sn/">
@@ -1160,6 +1168,8 @@ body::after{
             <h3 data-reveal data-delay=".1" style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--white);text-transform:lowercase;margin-bottom:.3rem">Réservation en Ligne</h3>
           </div>
           <form id="reservation-form">
+            <!-- honeypot anti-spam : invisible pour les humains, les bots le remplissent -->
+            <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none" aria-hidden="true"><label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <div class="form-group" data-reveal><label data-label="name">Nom complet</label><input type="text" name="nom" placeholder="Votre nom" required></div>
             <div class="form-row">
               <div class="form-group" data-reveal><label data-label="phone">Téléphone</label><input type="tel" name="tel" placeholder="+221 7X XXX XX XX" required></div>
@@ -1786,8 +1796,37 @@ if('ontouchstart' in window||navigator.maxTouchPoints>0){
   const form = document.getElementById('reservation-form');
   if(!form) return;
 
+  // Rate limiting : max 3 soumissions par heure par navigateur
+  const RATE_KEY = 'ngor_form_attempts';
+  const RATE_WINDOW = 60 * 60 * 1000; // 1 heure
+  const RATE_MAX = 3;
+  function isRateLimited() {
+    try {
+      const raw = localStorage.getItem(RATE_KEY);
+      const data = raw ? JSON.parse(raw) : {count:0, since: Date.now()};
+      if(Date.now() - data.since > RATE_WINDOW) { data.count = 0; data.since = Date.now(); }
+      if(data.count >= RATE_MAX) return true;
+      data.count++;
+      localStorage.setItem(RATE_KEY, JSON.stringify(data));
+      return false;
+    } catch(err) { return false; }
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
+
+    // Honeypot : si le champ caché est rempli, c'est un bot
+    const honeypot = form.querySelector('input[name="website"]');
+    if(honeypot && honeypot.value) return;
+
+    // Rate limiting
+    if(isRateLimited()){
+      alert(window.currentLang==='fr'
+        ? 'Trop de tentatives. Veuillez réessayer dans une heure ou contactez-nous par WhatsApp.'
+        : 'Too many attempts. Please try again in an hour or contact us via WhatsApp.');
+      return;
+    }
+
     const btn = form.querySelector('button[type="submit"]');
     const originalBtn = btn.innerHTML;
 
